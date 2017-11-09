@@ -1,0 +1,370 @@
+﻿
+<link rel="stylesheet" href="http://resource.ledianduo.com/css/swiper.min.css">
+<script src="http://resource.ledianduo.com/js/jquery.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/Content/coop2/css/adv.css">
+
+<div class="wrapper">
+
+    <form id="form1">
+
+        <ul class="breadcrumb panel">
+            <li><a onclick="javascript:history.back(-1);"><i class="fa fa-home"></i>返回</a></li>
+            <li><a>添加推广</a></li>
+        </ul>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel">
+                    <header class="panel-heading">
+                        添加推广资料
+                    </header>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-lg-2 col-sm-2 control-label">标题<span class="requiredstyle">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="text" ng-model="txtTitle" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 col-sm-2 control-label">类型<span class="requiredstyle">*</span></label>
+                                <div class="col-lg-6">
+                                    <select class="form-control" ng-model="advertType">
+                                        <option value="-1">类型</option>
+                                        <!--<option ng-repeat="(key,value) in advertTypes" ng-model="key" value="{{key}}">{{value}}</option>-->
+                                        <option value="1">开屏</option>
+                                        <option value="2">Banner</option>
+                                        <option value="3">信息流</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div ng-show="advertType==3" class="form-group">
+                                <label class="col-lg-2 col-sm-2 control-label">信息流样式<span class="requiredstyle">*</span></label>
+                                <div class="col-lg-6">
+                                    <select class="form-control" ng-model="advertStreamStyle">
+                                        <option value="-1">信息流样式</option>
+                                        <option value="1">小图</option>
+                                        <option value="2">大图</option>
+                                        <option value="3">组图</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 col-sm-2 control-label">投放范围<span class="requiredstyle">*</span></label>
+                                <div class="col-lg-6">
+                                    <select class="form-control" ng-model="addvertchannel">
+                                        <option value="-1">投放范围</option>
+                                        <option value="0">App</option>
+                                        <option value="1">用户分享后文章</option>
+                                        <option value="2">全平台</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 col-sm-2 control-label">图片<span class="requiredstyle">*</span></label>
+                                <div class="col-lg-6">
+                                    <div ng-hide="advertStreamStyle==3">
+                                        <input ng-hide="imgpath!=undefined && imgpath!=''" accept="image/*" type="file" ngf-select ng-model="file" ngf-max-size="10MB" required
+                                               ngf-model-invalid="errorFile" ngf-change="uploadImg(file,0)" style="width: 300px" />
+                                        <!--banner-->
+                                        <p style="margin:12px 0;color:red;" ng-hide="imgpath!=undefined && imgpath!=''" ng-if="advertType==2">*尺寸：750 ×360像素</p>
+                                        <!--信息流小图-->
+                                        <p style="margin:12px 0;color:red;" ng-hide="imgpath!=undefined && imgpath!=''" ng-if="advertStreamStyle==1 && advertType==3">*尺寸：200 ×150像素</p>
+                                        <!--信息流大图-->
+                                        <p style="margin:12px 0;color:red;" ng-hide="imgpath!=undefined && imgpath!=''" ng-if="advertStreamStyle==2 && advertType==3">*尺寸：710 ×236像素</p>
+                                        <!--开屏-->
+                                        <p style="margin:12px 0;color:red;" ng-hide="imgpath!=undefined && imgpath!=''" ng-if="advertType==1">*尺寸：640 ×960像素</p>
+                                        <div class="imgclose" ng-show="imgpath!=undefined && imgpath!=''">
+                                            <img src="{{imgpath}}" style="float:left;" /><i ng-click="clearImg(0)"></i>
+                                        </div>
+                                    </div>
+                                    <!--信息流组图-->
+                                    <div ng-if="advertStreamStyle==3">
+                                        <input ng-hide="imgpath1!=undefined && imgpath1!=''" accept="image/*" type="file" ngf-select ng-model="file1" ngf-max-size="10MB" required
+                                               ngf-model-invalid="errorFile" ngf-change="uploadImg(file1,1)" style="width: 300px;float:left;" />
+                                        <div ng-show="imgpath1!=undefined && imgpath1!=''" class="imgclose">
+                                            <img src="{{imgpath1}}" style="float:left;width:auto;height:auto;max-width:375px;max-height:330px" /><i ng-click="clearImg(1)"></i>
+                                        </div>
+                                        <input ng-hide="imgpath2!=undefined && imgpath2!=''" accept="image/*" type="file" ngf-select ng-model="file2" ngf-max-size="10MB" required
+                                               ngf-model-invalid="errorFile" ngf-change="uploadImg(file2,2)" style="width: 300px;float:left;" />
+                                        <div ng-show="imgpath2!=undefined && imgpath2!=''" class="imgclose">
+                                            <img src="{{imgpath2}}" style="float:left;width:auto;height:auto;max-width:375px;max-height:330px" /><i ng-click="clearImg(2)"></i>
+                                        </div>
+                                        <input ng-hide="imgpath3!=undefined && imgpath3!=''" accept="image/*" type="file" ngf-select ng-model="file3" ngf-max-size="10MB" required
+                                               ngf-model-invalid="errorFile" ngf-change="uploadImg(file3,3)" style="width: 300px;float:left;" />
+                                        <div ng-show="imgpath3!=undefined && imgpath3!=''" class="imgclose">
+                                            <img src="{{imgpath3}}" style="float:left;width:auto;height:auto;max-width:375px;max-height:330px" /><i ng-click="clearImg(3)"></i>
+                                        </div>
+                                        <br />
+                                        <!--信息流大图-->
+                                        <p style="margin:12px 0;color:red;" ng-if="advertStreamStyle==3 && advertType==3">*尺寸：226 ×170像素</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 col-sm-2 control-label">URL<span class="requiredstyle">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="text" ng-model="txtUrl" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="advertType ==3 || advertType == 2">
+                                <label class="col-lg-2 col-sm-2 control-label">投放栏目<span class="requiredstyle">*</span></label>
+                                <div class="col-lg-6">
+                                    <select class="form-control col-lg-3" ng-model="ddlCategory" ng-change="ddlCategoryChange()">
+                                        <option value="-2">请选择投放栏目</option>
+                                        <option value="0">热点</option>
+                                        <option value="-1">全国城市</option>
+                                        <option ng-repeat="(key,value) in ddlCategorys" ng-model="key" value="{{key}}">{{value}}</option>
+                                        <option ng-hide="JudgeContain(-1)" value="999">城市栏目</option>
+                                    </select>
+                                    <select class="form-control col-lg-3" ng-show="ddlCategory==999" ng-model="ddlProvince" ng-change="ddlProvinceChange()">
+                                        <option value="-1">请选择省份</option>
+                                        <option ng-repeat="(key,value) in ddlProvinces" ng-model="key" value="{{key}}">{{value}}</option>
+                                    </select>
+                                    <select class="form-control col-lg-3" ng-show="ddlProvince!=-1" ng-model="ddlCity" ng-change="ddlCityChange()">
+                                        <option value="-1">请选择城市</option>
+                                        <option ng-repeat="(key,value) in ddlCitys" ng-model="key" value="{{key}}">{{value}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 col-sm-2 control-label">计费方式<span class="requiredstyle">*</span></label>
+                                <div class="col-lg-6">
+                                    <select class="form-control" ng-model="ddlCostType">
+                                        <option value="-1">请选择计费方式</option>
+                                        <option value="1">CPM</option>
+                                        <option value="2">CPC</option>
+                                        <option ng-show="advertType ==1 || advertType == 2" value="3">CPD</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--<dl class="fill_single">
+                                <dt>投放时间：</dt>
+                                <dd>
+                                    <select class="drop-menu fl" ng-model="ddlTimeType">
+                                        <option value="-1">请选择投放时间</option>
+                                        <option value="1">长期投放</option>
+                                        <option value="2">按区间投放</option>
+                                    </select>
+                                </dd>
+                            </dl>-->
+                            <div ng-show="ddlCostType==3" class="form-group">
+                                <label class="col-lg-2 col-sm-2 control-label">投放开始时间：<span class="requiredstyle">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="order_date" readonly="readonly" placeholder="选择日期" date-single ng-model="dateStart">
+                                </div>
+                            </div>
+                            <!--<div ng-show="ddlCostType==3" class="form-group">
+                                <label class="col-lg-2 col-sm-2 control-label">投放结束时间：<span class="requiredstyle">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="order_date" readonly="readonly" placeholder="选择日期" date-single ng-model="dateEnd">
+                                </div>
+                            </div>-->
+                            <div ng-show="ddlCostType==3" class="form-group">
+                                <label class="col-lg-2 col-sm-2 control-label">投放时长（天）：<span class="requiredstyle">*</span></label>
+                                <div class="col-lg-6">
+                                    <input type="number" ng-model="txtDays" class="form-control" />
+                                </div>
+                            </div>
+                            <div ng-show="ddlCostType==3" class="form-group">
+                                <label class="col-lg-2 col-sm-2 control-label">总预算<span class="requiredstyle">*</span></label>
+                                
+                                <label class="col-lg-6 col-sm-6 control-label">{{txtDays * (3-advertType) * 10000}}</label>  
+                            </div>
+                            <!--<dl class="fill_single" ng-show="ddlCostType==3" id="timeStart">
+                                <dt>投放开始时间：</dt>
+                                <dd>
+                                    <input type="text" class="order_date" readonly="readonly" placeholder="选择日期" date-single ng-model="dateStart">
+                                </dd>
+                            </dl>
+                            <dl ng-show="ddlCostType==3" id="timeEnd">
+                                <dt>投放结束时间：</dt>
+                                <dd>
+                                    <input type="text" class="order_date" readonly="readonly" placeholder="选择日期" date-single ng-model="dateEnd">
+                                </dd>
+                            </dl>-->
+                            <div ng-show="ddlCostType!=3">
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-sm-2 control-label">总预算<span class="requiredstyle">*</span></label>
+                                    <div class="col-lg-6">
+                                        <input type="text" ng-model="txtMoney" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-sm-2 control-label">单日预算<span class="requiredstyle">*</span></label>
+                                    <div class="col-lg-6">
+                                        <input type="text" ng-model="txtDayMoney" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <asp:button id="btnSubmit" text="提交审核" cssclass="btn btn-danger" />
+                                    <input type="button" value="提交审核" class="btn btn-danger" ng-click="saveAdvert()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div>
+                    <div class="panel-body">
+                        <div class="phone-model">
+                            <div class="phone-headset"></div>
+                            <div class="phone-screen" ng-style="{'background-color':config.bgcolor}">
+                                <div class="design-preview">
+                                    <div class="wp-config">
+                                        <div class="wp-comp">
+                                            <h1><span class="ng-binding"></span></h1>
+                                        </div>
+                                    </div>
+                                    <div ui-sortable="sortableTpls" ng-model="slices" class="wp-comps" style="min-height: 450px;">
+                                        <!-- 信息流广告 -->
+                                        <div class="advOne" ng-if="advertType==3 && advertStreamStyle!=3">
+                                            <div class="newTit" style="margin-top: 0;">
+                                                <h2>注意啦！清明小长假火车票已全面开售</h2>
+                                                <p style="font-size:16px;">
+                                                    <span>2017-03-07</span><span><a style="color:#6a7e97">浙江在线</a></span>
+                                                </p>
+                                            </div>
+                                            <div class="newContent">
+
+                                                <p>根据火车票30天预售期安排，3月6日，清明小长假期间的火车票已经全面开售。清明小长假期间，准备回家乡扫墓或外出游玩的人们可以提前订票。</p>
+
+                                            </div>
+                                            <div class="newTip">
+                                                <span class="fl">举报</span>
+                                            </div>
+                                            <div class="bottomWrap read_top showbox" style="display:block">
+                                                <!--大图-->
+                                                <div ng-show="advertStreamStyle==2" class="advWrap ">
+                                                    <a href='#'>
+                                                        <h3><i>广告</i>{{txtTitle}}</h3>
+                                                        <div class='advImg'>
+                                                            <img ng-show="imgpath!=undefined && imgpath!=''" src="{{imgpath}}" alt=' '>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div ng-show="advertStreamStyle==1" id="readRecommend" class="readWrap" style="">
+                                                    <div class="readTit">
+                                                        <span>推荐阅读</span>
+                                                    </div>
+                                                    <ul class="readList" id="readRecommendList">
+                                                        <li>
+                                                            <a href="{{txtUrl}}" target="_blank">
+                                                                <div class="readImg fl">
+                                                                    <img ng-show="imgpath!=undefined && imgpath!=''" src="{{imgpath}}" alt="" />
+                                                                </div>
+                                                                <div class="readContent fr">
+                                                                    <h3>{{txtTitle}}</h3>
+                                                                    <div class="source">
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:void(0)">
+                                                                <div class="readImg fl">
+                                                                    <img src="http://cms-bucket.nosdn.127.net/2f1561dd7447468d83f7a1ad4bbdb67620170320091934.png" alt="" />
+                                                                </div>
+                                                                <div class="readContent fr">
+                                                                    <h3>涉案两亿！温州警方跨四省破获特大有毒食品案</h3>
+                                                                    <div class="source">
+                                                                        中新网
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:void(0)">
+                                                                <div class="readImg fl">
+                                                                    <img src="http://cms-bucket.nosdn.127.net/97cb7be155044d4bb79b68a5d63cf6b520170322095549.png" alt="" />
+                                                                </div>
+                                                                <div class="readContent fr">
+                                                                    <h3>男子开着无牌车 在江山市区找女孩搭讪 小心！</h3>
+                                                                    <div class='advTip'>
+                                                                        广告
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- banner广告 -->
+                                        <div class="advTwo" ng-if="advertType==2">
+                                            <div class="advCount">
+                                                <img src="/Content/images/adv/a1.jpg" alt="">
+                                                <div class="swiper-container  showbox" id="swiper">
+                                                    <div class="swiper-wrapper">
+                                                        <div class='swiper-slide'>
+                                                            <a target="_blank" href='{{txtUrl}}' style="min-height:120px;display:block;">
+                                                                <img ng-show="imgpath!=undefined && imgpath!=''" src='{{imgpath}}' alt='' />
+                                                            </a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <img src="/Content/images/adv/a2.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <!-- 信息流广告(组图) -->
+                                        <div class="advTwo" ng-if="advertType==3 && advertStreamStyle==3">
+                                            <div class="advCount">
+                                                <img src="/Content/images/adv/a1.jpg" alt="">
+                                                <div class="swiper-container" id="swiper">
+                                                    <div class="swiper-wrapper">
+                                                        <div class='swiper-slide'>
+                                                            <a href='javascript:void(0)'>
+                                                                <img src='/Content/images/adv/a3.jpg' alt=''>
+                                                            </a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="advthreeimg showbox">
+                                                    <h2>{{txtTitle}}</h2>
+                                                    <ul>
+                                                        <li>
+                                                            <img ng-show="imgpath1!=undefined && imgpath1!=''" src="{{imgpath1}}" alt="">
+                                                        </li>
+                                                        <li>
+                                                            <img ng-show="imgpath2!=undefined && imgpath2!=''" src="{{imgpath2}}" alt="">
+                                                        </li>
+                                                        <li class="clear_m">
+                                                            <img ng-show="imgpath3!=undefined && imgpath3!=''" src="{{imgpath3}}" alt="">
+                                                        </li>
+                                                        <p class="advTips"><span>广告</span></p>
+                                                    </ul>
+                                                </div>
+                                                <img src="/Content/images/adv/a2.jpg" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="advThree" ng-if="advertType==1">
+                                            <div class="advCount">
+                                                <a target="_blank" href="{{txtUrl}}" style="min-height:400px;display:block;" class="showbox">
+                                                    <img ng-show="imgpath!=undefined && imgpath!=''" src="{{imgpath}}" alt="" class="advimg" />
+                                                </a>
+                                                <img src="/Content/images/adv/s1.png" alt="" class="logobg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="phone-home"></div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+

@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <div class="wrapper">
+
+        <ul class="breadcrumb panel">
+            <li><a><i class="fa fa-home"></i>版块管理</a></li>
+        </ul>
+        <div class="panel">
+            <div class="panel-heading">
+                <form>
+                    <ul class="btn-group pull-left" style="margin-right:12px;">
+                        <li><a class="btn btn-success" ng-click="open()">新增分类</a></li>
+                    </ul>
+                    <!--<div class="btn-group pull-left" style="margin-right:12px;">
+                        <select class="form-control " ng-model="category_id" ng-change="changecat(category_id)">
+                            <option value="-1">类别</option>
+                            <option ng-repeat="item in category_list" ng-model="item.Id" value="{{item.Id}}">{{item.Name}}</option>
+                        </select>
+                    </div>-->
+                    <!--<div class="form-inline">
+                        <input id="searchBtn" type="submit" value="搜索" ng-click="search()" class="btn btn-danger" />
+                    </div>-->
+                </form>
+            </div>
+            <div class="panel-body">
+
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                    <tr>
+                        <!--<th>ID</th>-->
+                        <th>版块名称</th>
+                        <!--<th>版块类别</th>
+                        <th>图片</th>-->
+                        <th>发布时间</th>
+                        <!--<th>修改时间</th>-->
+                        <th class="clear_bg">操作</th>
+                    </tr>
+                    <tr ng-repeat="item in category_list">
+                        <!--<td>{{item.Id}}</td>-->
+                        <td style="max-width:100px">{{item.Name}}</td>
+                        <!--<td>{{CatName(item.pid)}}</td>
+                        <td><img src="{{item.icon}}" alt="版块图片" /></td>-->
+                        <td>{{item.create_dt}}</td>
+                        <!--<td>{{item.modifyDate}}</td>-->
+                        <td class="td_handle">
+                            <a href="javascript:void(0)" class="label label-danger" ng-click="DeletePost(item.id)">删除</a>
+                            <!--<a href="javascript:void(0)" ng-show="item.state==0" ng-click="ToTop(item.id,2)">置顶</a>
+                            <a href="javascript:void(0)" ng-show="item.state==0" ng-click="ToTop(item.id,1)">加精</a>
+                            <a href="javascript:void(0)" ng-show="item.state==2" ng-click="ToTop(item.id,0)">取消置顶</a>
+                            <a href="javascript:void(0)" ng-show="item.state==1" ng-click="ToTop(item.id,0)">取消精华</a>-->
+                        </td>
+                </table>
+                <!--<div class="CountTotal">
+                    <div class="dataTables_paginate paging_bootstrap pagination">
+                        <ul>
+                            <li><a href="javascript:void(0)" ng-click="pager.pre()">上一页</a></li>
+                            <li ng-repeat="item in pager.list">
+                                <a href="javascript:void(0)" ng-if="item.text =='.'">{{item.text}}</a>
+                                <a href="javascript:void(0)" ng-if="item.text != '.'&& !item.disabled " class="c_page">{{item.text}}</a>
+                                <a href="javascript:void(0)" ng-if="item.text != '.'&& item.disabled" ng-click="pager.go(item.index)">{{item.text}}</a>
+                            </li>
+                            <li><a href="javascript:void(0)" ng-click="pager.next()">下一页</a></li>
+                        </ul>
+                    </div>
+                    <span>共<b>{{count}}</b>条记录</span>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="zhezhao" ng-show="isShow">
+        <div class="Mask  modal-dialog">
+            <div class="styleCurrentLocal"><b>添加版块分类</b></div>
+            <div class="styleFillList">
+                <!--<dl class="fill_single"><dt>标题<span class="requiredstyle">*</span>：</dt><dd><select ng-options="a.Id as a.Name for a in pushMemberTypes" ng-model="pushMemberType" class="drop-menu"></select></dd></dl>
+                <dl class="fill_single">
+                    <dt>版块<span class="requiredstyle">*</span>：</dt>
+                    <dd>
+                        <select ng-model="CategoryIdOne" class="drop-menu" ng-change="GetCategoryIds(CategoryIdOne)">
+                            <option value="-1">版块分类</option>
+                            <option ng-repeat="(key, value) in EpCategoryLeverOneIds" ng-selected="{{key==CategoryIdOne}}" ng-model="key" value="{{key}}">{{value}}</option>
+                        </select>
+                    </dd>
+                </dl>-->
+                <dl class="fill_single">
+                    <dt>版块类别名称<span class="requiredstyle">*</span>：</dt>
+                    <dd>
+                        <input type="text" ng-model="add_plat_cat" value="" />
+                    </dd>
+                </dl>
+                <div class="styleButton">
+                    <input type="button" value="保存" class="btn btn_confirm" ng-click="AddPlatCat()">
+                    <input type="button" value="取消" class="btn btn_cancel" id="closeBtn" ng-click="close()">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

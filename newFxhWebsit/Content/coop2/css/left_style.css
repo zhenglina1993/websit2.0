@@ -1,0 +1,32 @@
+HTML{overflow:auto;overflow-x: hidden;overflow-x: auto !important;}
+*{ margin:0; padding:0}
+body{font-size:12px;background-image:url(../images/background.png);margin:0px;padding:0px; font-family:"微软雅黑";}
+a{text-decoration:none;color:#666;}
+a:hover {text-decoration:none;color:#666}
+ul li{ list-style:none}
+.ln_ico{width:17px;height:17px;display:inline-block;position:absolute;left:18px;top:14px; opacity:0.3}
+.ln_bg01{background:url(../images/left_n01.png) no-repeat;}
+.ln_bg02{background:url(../images/left_n02.png) no-repeat;}
+.ln_bg03{background:url(../images/left_n03.png) no-repeat;}
+.ln_bg04{background:url(../images/left_n04.png) no-repeat;}
+.ln_bg05{background:url(../images/left_n05.png) no-repeat;}
+.ln_bg06{background:url(../images/left_n06.png) no-repeat;}
+.ln_bg07{background:url(../images/left_n07.png) no-repeat;}
+.ln_bg08{background:url(../images/left_n08.png) no-repeat;}
+.ln_bg09{background:url(../images/left_n09.png) no-repeat;}
+.ln_jts{width:14px;height:14px;position:absolute;top:13px;right:16px;background:url(../images/rjt_x.png);overflow:hidden;}
+.ln_jtx{width:14px;height:14px;position:absolute;top:13px;right:16px;background:url(../images/rjt_s.png);overflow:hidden;}
+.left_main{width:100%; overflow:hidden; float:inherit;}
+.left_nav{border-left:none;color:#666;font-weight:normal;font-size:14px;line-height:40px;height:40px;text-shadow:none;text-transform:none; position:relative; cursor:pointer; background:#fff}
+.left_nav a{font-size:14px; color:#666; position:absolute; left:45px;}
+.left_nav a:hover{font-size:14px; color:#666; position:absolute; left:45px;}
+.left_list{background:#fff;overflow:hidden;width:240px;border-bottom:1px solid #e7e7eb}
+.left_list li{height:34px;line-height:34px;width:240px;overflow:hidden;text-indent:45px; margin:5px 0}
+a.left_lista{height:34px;height:34px;overflow:hidden;color:#222;font-size:14px;display:block}
+a:hover.left_lista{background:#f5f5f7;height:36px;height:36px;overflow:hidden;color:#222;display:block}
+a.left_listh{height:34px;height:34px;overflow:hidden;color:#fff;font-size:14px;display:block;background:#59c85e;}
+a:hover.left_listh{background:#59c85e;height:34px;height:34px;overflow:hidden;color:#fff;display:block}
+.left_nav_qq{color:#333;font-weight:normal;font-size:14px;line-height:20px;height:20px;text-shadow:none;text-transform:none; margin-top:20px}
+.left_nav_qq a{color:#333; text-decoration:none}
+.left_nav_qq a:hover{color:#333; text-decoration:underline}
+.left_nav_qq img{width:18px; height:18px; float:left; margin:1px 10px 1px 20px}

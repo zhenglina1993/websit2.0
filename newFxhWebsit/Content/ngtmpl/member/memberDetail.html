@@ -1,0 +1,162 @@
+﻿<div class="wrapper">
+
+    <ul class="breadcrumb panel">
+        <li><a onclick="javascript:history.back(-1);"><i class="fa fa-home"></i>返回</a></li>
+        <li>
+            <a>用户信息</a>
+        </li>
+    </ul>
+    <div class="row states-info">
+        <div class="col-md-3">
+            <div class="panel red-bg">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa  fa-file-text-o"></i>
+                        </div>
+                        <div class="col-xs-8">
+                            <span class="state-title"> 文章分享 </span>
+                            <h4>{{memberDetail.MemberArticleCount}} 次</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel blue-bg">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-hand-o-up"></i>
+                        </div>
+                        <div class="col-xs-8">
+                            <span class="state-title">  推广点击  </span>
+                            <h4>{{memberDetail.ClickCount}} 次</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel green-bg">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa  fa-share-square-o"></i>
+                        </div>
+                        <div class="col-xs-8">
+                            <span class="state-title"> 推广转发 </span>
+                            <h4>{{memberDetail.TransCount}}次</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel yellow-bg">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-eye"></i>
+                        </div>
+                        <div class="col-xs-8">
+                            <span class="state-title">  推广曝光  </span>
+                            <h4>{{memberDetail.LookCount}}次</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="profile-pic text-center">
+                                <img alt="" ng-src="{{memberDetail.iCon}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <ul class="p-info">
+                                <li>
+                                    <div class="title">昵称</div>
+                                    <div class="desk">{{memberDetail.Membername}} </div>
+                                </li>
+                                <li>
+                                    <div class="title">激活状态</div>
+                                    <div class="desk">{{memberDetail.ActiveState}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">手机号</div>
+                                    <div class="desk">{{memberDetail.Mobile}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">地区</div>
+                                    <div class="desk">{{memberDetail.City}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">性别</div>
+                                    <div class="desk">{{memberDetail.Sex}}</div>
+                                </li>
+                                <li>
+                                    <div class="title">最近登录</div>
+                                    <div class="desk">{{memberDetail.LastLoginDate}}</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <header class="panel-heading">
+                            设备信息
+                        </header>
+                        <div class="panel-body" style="display: block;">
+                            <p><span>设备系统：</span><span>{{memberDetail.Device}}</span></p>
+                            <p><span>设备序列号：</span><span>{{memberDetail.DeviceCode}}</span></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <div class="panel">
+                        <header class="panel-heading">
+                            用户喜好
+                        </header>
+                        <div class="panel-body" style="display: block;">
+                            <p><span>用户喜好：</span><span>{{memberDetail.MemberLike}}</span></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <div class="panel">
+                        <header class="panel-heading">
+                            帐号信息
+                        </header>
+                        <div class="panel-body" style="display: block;">
+                            <p><span>注册时间：</span><span>{{memberDetail.CreateDate}}</span></p>
+                            <p><span>产品激活：</span><span>{{memberDetail.ActiveState}}</span></p>
+                            <p><span>激活来源：</span><span>{{memberDetail.AgencyName}}</span></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+
+        </div>
+        
+    </div>
+</div>

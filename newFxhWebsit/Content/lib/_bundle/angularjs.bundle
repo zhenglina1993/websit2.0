@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<bundle virtualPath="~/lib/angular.js">
+  <include>
+  </include>
+  <style>
+    <file>/lib/_js/angularjs/angular-csp.css</file>
+  </style>
+  <script>
+    <file>/lib/_js/angularjs/angular.js</file>
+    <file>/lib/_js/angularjs/angular-touch.js</file>
+    <file>/lib/_js/angularjs/angular-route.js</file>
+    <file>/lib/_js/angularjs/angular-sanitize.js</file>
+    <file>/lib/_js/angularjs/angular-cookies.js</file>
+  </script>
+</bundle>

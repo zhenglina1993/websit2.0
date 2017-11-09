@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>帖子</title>
+</head>
+<body>
+    <%@ Page Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Web.Console.Index" %>
+
+    <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+        <title>NEW FXH</title>
+    </asp:Content>
+    <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+        <script>
+            $(function () {
+                $(".phonemenu").click(function () {
+                    if ($(this).hasClass("menuClose")) {
+                        $(".phonemenu").removeClass("menuClose");
+                        $(this).addClass("menuOpen");
+                        $(".iphoneshow").addClass("iphoneHide");
+                    }
+                    else {
+                        $(this).addClass("menuClose");
+                        $(".iphoneshow").removeClass("iphoneHide");
+                    }
+                })
+            })
+        </script>
+
+        <div class="pgc-header">
+            <div class="pgc-headerwrap">
+                <div class="pgc-headerlogo">
+                    <img src="../Content/images/login_logo.png" alt="Alternate Text" />
+                </div>
+                <div class="pgc-headerRight">
+                    <ul class="notification-menu">
+                        <li>
+                            <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                                <i class="fa fa-envelope-o" style="font-size:24px;margin-top:0;"></i>
+                                <span class="badge">5</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <img src="../Content/images/img2.jpg" alt="" />
+                                admin
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                <li><a href="#"><i class="fa fa-user"></i>杭州嗨趣网络科技有限公司</a></li>
+                                <li><a href="#"><i class="fa fa-sign-out"></i>退出</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="pgc-center">
+
+            <div class="pgc-leftmenu">
+                <div class="leftNav">
+                    <div class="left-side-inner">
+                        <ul class="nav nav-pills nav-stacked custom-nav">
+                            <li class="menu-list">
+                                <a href=""><i class="fa fa-book"></i> <span>资讯管理</span></a>
+                                <ul class="sub-menu-list">
+                                    <li><a href="/Membertool/Index.aspx#/articlelist">平台新闻管理</a></li>
+                                    <li><a href="/Member/Index.aspx#/memberarticlelist/0/0">用户新闻管理</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-list"><a href="/Member/Index.aspx#/memberlist"><i class="fa fa-user"></i> <span>用户管理</span></a></li>
+
+                            <li class="menu-list">
+                                <a href=""><i class="fa fa-toggle-left"></i> <span>娱乐管理</span></a>
+                                <ul class="sub-menu-list">
+                                    <li><a href="/Sysconfig/Index.aspx#/picsubjectlist/0">图片管理</a></li>
+                                    <li><a href="/Sysconfig/Index.aspx#/videolist/0">视频管理</a></li>
+                                </ul>
+                            </li>
+
+                            <li class=" menu-list">
+                                <a href=""><i class="fa fa-group"></i> <span>合作商管理</span></a>
+                                <ul class="sub-menu-list">
+                                    <li><a href="/Membertool/Index.aspx#/agencylist/1">合作商管理</a></li>
+                                    <li><a href="/Membertool/Index.aspx#/enterpriselist">企业版管理</a></li>
+                                    <li><a href="/Membertool/Index.aspx#/shareprofits">分润商管理</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="menu-list"><a href="/membertool/Index.aspx#/activecodelist/0"><i class="fa fa-code fl"></i><span class="fl">激活码管理</span></a></li>
+                            <li class="menu-list"><a href="/Advert/Index.aspx#/advertlist/0"><i class="fa fa-share fl"></i><span class="fl">推广管理</span></a></li>
+
+
+                            <li class=" menu-list">
+                                <a href="#"><i class="fa  fa-bullhorn fl"></i><span>系统消息</span></a>
+                                <ul class="sub-menu-list">
+                                    <li><a href="/Sysconfig/Index.aspx#/pushlist">推送管理</a></li>
+                                    <li><a href="/Sysconfig/Index.aspx#/messagelist">消息中心</a></li>
+                                </ul>
+                            </li>
+
+                            <li class=" menu-list">
+                                <a href="#"><i class="fa  fa-cog fl"></i><span class="fl">账户管理</span></a>
+                                <ul class="sub-menu-list">
+                                    <%--
+                                    <li><a href="＃" class="left_lista">账户信息</a></li>--%>
+                                    <li><a href="/Sysconfig/Index.aspx#/changepwd">修改密码</a></li>
+                                </ul>
+                            </li>
+                            <li class=" menu-list">
+                                <a href="#"><i class="fa  fa-cogs fl"></i><span class="fl">审核管理</span></a>
+                                <ul class="sub-menu-list">
+                                    <li><a href="/Membertool/Index.aspx#/articleauditlist/0">新闻审核</a></li>
+                                    <li><a href="/Membertool/Index.aspx#/agencyauditlist">合作商审核</a></li>
+                                    <li><a href="/Advert/Index.aspx#/advertlist/1">推广审核</a></li>
+                                    <%--
+                                    <li><a href="/Sysconfig/Index.aspx#/videolist/1" class="left_lista">视频审核</a></li>--%>
+                                    <%--
+                                    <li><a href="/Sysconfig/Index.aspx#/picsubjectlist/1" class="left_lista">美图审核</a></li>--%>
+                                </ul>
+                            </li>
+
+                            <li class="menu-list">
+                                <a href="/membertool/Index.aspx#/ep_relation_list">
+                                    <i class="fa fa-sitemap fl"></i>
+                                    <span class="fl">企业互推</span>
+                                </a>
+                            </li>
+
+                            <li class=" menu-list">
+                                <a href="#"><i class="fa fa-edit fl"></i><span class="fl">平台管理</span></a>
+                                <ul class="sub-menu-list">
+                                    <li><a href="/Sysconfig/Index.aspx#/inducemember">修改用户归属</a></li>
+                                    <%--
+                                    <li><a href="/Sysconfig/Index.aspx#/advisorytelephone" class="left_lista">咨询电话</a></li>--%>
+                                    <!-- <li><a href="＃"  class="left_lista">新闻抓取配置</a></li> -->
+                                    <!-- <li><a href="＃"  class="left_lista">角色权限</a></li> -->
+                                    <!-- <li><a href="＃"  class="left_lista">提现管理</a></li> -->
+                                    <li><a href="/Sysconfig/Index.aspx#/reportlist">举报管理</a></li>
+                                    <li><a href="/Sysconfig/Index.aspx#/appversionlist">App版本控制</a></li>
+                                    <!-- <li><a href="＃"  class="left_lista">抽成比例</a></li> -->
+                                    <li><a href="/Sysconfig/Index.aspx#/material">通用素材</a></li>
+                                    <li><a href="/Sysconfig/Index.aspx#/materialCategory">通用素材类别</a></li>
+                                    <li><a href="/Sysconfig/Index.aspx#/plate_list">版块管理</a></li>
+                                    <li><a href="/Sysconfig/Index.aspx#/plate_category">版块类别</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-list">
+                                <a href="/Filemange/Index.aspx#/file_manage">
+                                    <i class="fa fa-download fl"></i>
+                                    <span class="fl">文件管理</span>
+                                </a>
+                            </li>
+                            <li class=" menu-list">
+                                <a href="#"><i class="fa fa-wrench fl"></i><span class="fl">平台工具</span></a>
+                                <ul class="sub-menu-list">
+                                    <li><a href="/Sysconfig/Index.aspx#/EditArticle">文章数据管理</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-list">
+                                <a href=" /Sysconfig/Index.aspx#/postbar"><i class="fa fa-wrench fl"></i><span class="fl">帖子管理</span></a>
+                                <ul class="sub-menu-list">
+                                    <li><a href="/">论坛发帖</a></li>
+                                    <li><a>视频管理</a></li>
+                                </ul>
+                            </li>
+                            <li class=" menu-list">
+                                <a href="#"><i class="fa fa-wrench fl"></i><span class="fl">产品管理</span></a>
+                                <ul class="sub-menu-list">
+                                    <li><a href="/Product/Index.aspx#/house">房屋管理</a></li>
+                                    <li><a href="/Product/Index.aspx#/car">汽车管理</a></li>
+                                    <li><a href="/Product/Index.aspx#/car">汽车管理</a></li>
+
+                                </ul>
+                            </li>
+                            <%--
+                            <li class=" mainMenu">
+                                <a href="/Statistical/Index.aspx#/Article_exposure">
+                                    <div class="leftTxt clear_add">
+                                        <i class="fa fa-bar-chart-o fl"></i>
+                                        <span class="fl">曝光排行</span>
+                                    </div>
+                                </a>
+                            </li>--%>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="pgc-rightcount">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel">
+                                <div class="panel-body  box-show">
+                                    <div class="col-lg-4">
+                                        1
+                                    </div>
+                                    <div class="col-lg-4">
+                                        1
+                                    </div>
+                                    <div class="col-lg-4">
+                                        1
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </asp:Content>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+﻿<div class="wrapper">
+
+    <ul class="breadcrumb panel">
+        <li><a onclick="javascript:history.back(-1);"><i class="fa fa-home"></i>返回</a></li>
+        <li><a><span ng-show="agencyId>0">{{EnterpriseDetail.company}}-</span>推广数据</a></li>
+    </ul>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    累计为您节省推广费：<span class="text-danger">{{EnterpriseDetail.Spend}}</span>  元
+                </header>
+                <div class="panel-body">
+                    <ol class="li_bottom">
+                        <li>
+                            文章总数：<h2>{{EnterpriseDetail.Total}} </h2>篇
+                        </li>
+                        <li>
+                            文章总曝光：<h2>{{EnterpriseDetail.LookNum}} </h2>次
+                        </li>
+                        <li>
+                            推广总点击：<h2>{{EnterpriseDetail.ClickNum}} </h2> 次
+                        </li>
+                        <li>
+                            文章总转发：<h2>{{EnterpriseDetail.TransNum}} </h2>次
+                        </li>
+
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    员工数据
+                </header>
+                <div class="panel-body">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                        <tr>
+                            <th>帐号</th>
+                            <th>文章曝光</th>
+                            <th>推广点击</th>
+                            <th>文章转发</th>
+                            <th>点击率</th>
+                            <th>转发率</th>
+                            <th>使用频率（次/日）</th>
+                            <th class="clear_bg">备注</th>
+                        </tr>
+                        <tr ng-repeat="item in EnterpriseDetail.MemberArticleList">
+                            <td>{{item.mobile}}</td>
+                            <td>{{item.LookNum}}</td>
+                            <td>{{item.ClickNum}}</td>
+                            <td>{{item.TransNum}}</td>
+                            <td>{{item.ClickPercent}}</td>
+                            <td>{{item.TransPercent}}</td>
+                            <td>{{item.Frequency}}</td>
+                            <td>{{item.remark}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">
+                    <a href="javascript:void(0)" ng-click="GetLineChart('day')" class="btn btn-default pull-left" style="margin-right:12px;">今天</a>
+                    <a href="javascript:void(0)" ng-click="GetLineChart('month')" class="btn btn-default pull-left" style="margin-right:12px;">本月</a>
+
+                    <div date-tool="dateRange" class="form-inline pull-left">
+                        <input type="text" readonly="readonly" name="reservation" id="reservation" class="form_datetime form-control ng-pristine ng-valid ng-touched" placeholder="选择日期" ng-change="GetLineChart('section')" ng-model="dateRange" />
+                       
+                        <a href="javascript:void(0)" ng-click="GetLineChart('section')" class="btn btn-danger">搜索</a>
+                      
+                    </div>
+                   
+                </header>
+                <div class="panel-body">
+                    <div class="alert-info alert">
+                        【日期区间查询说明】选择时间段查询时，查询结果不包含结束日期。<br />
+                        例:查询2017-05-01至2017-05-31整月的数据，应选择查询时间区间为2017-05-01至2017-06-01
+                    </div>
+                    <line-chart config="config" data="multiple"></line-chart>
+                    <table ng-show="Load" width="96%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                        <tr>
+                            <th>帐号</th>
+                            <th>文章曝光</th>
+                            <th>推广点击</th>
+                            <th>文章转发</th>
+                            <th>点击率</th>
+                            <th>转发率</th>
+                            <th class="clear_bg">备注</th>
+                        </tr>
+                        <tr ng-repeat="item in MemberArticleDetailList">
+                            <td>{{item.mobile}}</td>
+                            <td>{{item.LookNum}}</td>
+                            <td>{{item.ClickNum}}</td>
+                            <td>{{item.TransNum}}</td>
+                            <td>{{item.ClickPercent}}</td>
+                            <td>{{item.TransPercent}}</td>
+                            <td>{{item.remark}}</td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

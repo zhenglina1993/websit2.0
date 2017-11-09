@@ -1,0 +1,142 @@
+﻿<div ng-show="stateInfo.ep_disabled==1">
+    <div class="wrapper col_100 Default">
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="panel">
+                    <div class="panel-body text-center">
+                        <img src="../Content/Images/default1.png" />
+                        <h4>
+                            您还未开通企业互推，请联系<span>{{stateInfo.company_name}}</span>开通。
+                        </h4>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="wrapper" style="width:1400px" ng-show="stateInfo.ep_disabled==0">
+        <ul class="breadcrumb panel">
+            <li ng-show="agency_id>0||advert_id>0"><a onclick="javascript:history.back(-1);"><i class="fa fa-home"></i>返回</a></li>
+            <li><a>互推数据</a></li>
+        </ul>
+        <div class="row">
+            <div class=" col-md-12">
+                <div class="panel">
+                    <div class="panel-body extra-pad">
+                        <div class="col-sm-3 col-xs-3">
+                            <div class="v-value">
+                                <h2>{{advert_data.look_num}}</h2>
+                            </div>
+                            <div id="visit-1"></div>
+                            <div class="v-info">
+                                总曝光
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div class="v-value">
+                                <h2>{{advert_data.click_num}}</h2>
+                            </div>
+                            <div id="visit-2"></div>
+                            <div class="v-info">
+                                总点击
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div class="v-value">
+                                <h2>{{advert_data.click_rate}}%</h2>
+                            </div>
+                            <div id="visit-2"></div>
+                            <div class="v-info">
+                                点击率
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div class="v-value">
+                                <h2>{{advert_data.advert_money}} </h2>元
+                            </div>
+                            <div id="visit-2"></div>
+                            <div class="v-info">
+                                节省广告费
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class=" panel-body">
+                        <div class="col-sm-12" ng-hide="pie_region_series.length>0">
+                            <div class="form-group">
+                                <div class="nodatacircle">
+                                    暂无数据
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group" ng-show="pie_region_series.length>0">
+                            <div class="col-md-12">
+                                <div class="col-sm-6" style="position:relative;border-right:1px solid #ddd;">
+                                    <a href="javascript:void(0)" ng-click="Toep_advert_data_list()" style=" top: 32px; position: absolute; right: 40px;z-index:9999;">查看全部</a>
+                                    <chart-pie option="relationPieOption" output-data="nodeInfo"></chart-pie>
+                                </div>
+                                <div class="col-sm-6">
+                                    <chart-pie option="regionPieOption" output-data="nodeInfo"></chart-pie>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel-heading">
+                        <ul class="btn-group pull-left" style="margin-right:12px;">
+                            <li class=" pull-left" style="margin-right:12px;"><a href="javascript:void(0)" ng-click="get_date('day')" class="btn btn-default">今天</a></li>
+                            <li class=" pull-left">
+                                <a href="javascript:void(0)" ng-click="get_date('month')" class="btn btn-default">本月</a>
+                            </li>
+                        </ul>
+                        <div date-tool="dateRange" class="form-inline">
+                            <div class="form-group">
+                                <input type="text" readonly="readonly" name="reservation" id="reservation" class="form_datetime form-control" placeholder="选择日期" ng-model="dateRange" />
+                            </div>
+                            <input type="submit" value="搜索" ng-click="get_date('section')" class="btn btn-default" />
+                        </div>
+
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <chart-line option="lineOption" output-data="nodeInfo"></chart-line>
+                            <!--line-click="onLineClick();"-->
+                            <!--<line-chart ng-show="double" config="config" data="multiple"></line-chart>-->
+                            <!--<line-chart ng-show="single" config="config" data="single"></line-chart>-->
+                        </div>
+
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                            <tr>
+                                <th>时间点</th>
+                                <th>曝光</th>
+                                <th>点击</th>
+                                <th>点击率</th>
+                                <!--<th>节省广告费</th>-->
+                            </tr>
+                            <tr ng-repeat="item in list">
+                                <td>{{item.sj}}</td>
+                                <td>{{item.num_look}}</td>
+                                <td>{{item.num_click}}</td>
+                                <td>{{(item.num_look==0?0:(item.num_click/item.num_look)*100).toFixed(2)}}%</td>
+                                <!--<td>434.91</td>-->
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

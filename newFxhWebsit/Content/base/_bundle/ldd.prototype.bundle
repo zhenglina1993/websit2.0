@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<bundle virtualPath="~/base/ldd.prototype.js">
+  <include>
+  </include>
+  <style>
+  </style>
+  <script>
+    <file>/base/_js/ldd.prototype.js</file>
+  </script>
+</bundle>

@@ -1,0 +1,68 @@
+﻿<div class="wrapper">
+    <ul class="breadcrumb panel">
+        <li><a><i class="fa fa-home"></i>App版本管理</a></li>
+    </ul>
+    <div class="panel">
+
+
+        <div class="panel-heading">
+            <div class="form-inline">
+                <input type="button" value="添加版本" ng-click="open()" class="btn btn-danger" />
+            </div>
+        </div>
+        <div class="panel-body">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                <tr>
+                    <th>App编号</th>
+                    <th>App类型</th>
+                    <th>版本</th>
+                    <th>URL</th>
+                    <th>创建时间</th>
+                    <th class="clear_bg">操作</th>
+                </tr>
+                <tr ng-repeat="item in list">
+                    <td>{{item.appId}}</td>
+                    <td>{{apptype(item.appType)}}</td>
+                    <td>{{item.version}}</td>
+                    <td>{{item.url}}</td>
+                    <td>{{item.createDate}}</td>
+                    <td class="td_handle">
+                        <a href="javascript:void(0)" ng-click="edit(item)">编辑</a>
+                    </td>
+                </tr>
+            </table>
+            <div class="CountTotal">
+                <div class="dataTables_paginate paging_bootstrap pagination">
+                    <ul>
+                        <li><a href="javascript:void(0)" ng-click="pager.pre()">← 上一页</a></li>
+                        <li ng-repeat="item in pager.list">
+                            <a href="javascript:void(0)" ng-if="item.text =='.'">{{item.text}}</a>
+                            <a href="javascript:void(0)" ng-if="item.text != '.'&& !item.disabled " class="c_page">{{item.text}}</a>
+                            <a href="javascript:void(0)" ng-if="item.text != '.'&& item.disabled" ng-click="pager.go(item.index)">{{item.text}}</a>
+                        </li>
+                        <li><a href="javascript:void(0)" ng-click="pager.next()">下一页 →</a></li>
+                    </ul>
+                </div>
+                <span>共<b>{{count}}</b>条记录</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="zhezhao" ng-show="isOpen">
+    <div class="Mask  modal-dialog">
+        <div class="styleCurrentLocal"><b>添加修改版本</b></div>
+        <div class="styleFillList">
+
+            <dl class="fill_single"><dt>App类型<span class="requiredstyle">*</span>：</dt><dd><select ng-options="a.Id as a.Name for a in appTypes" ng-model="appType" class="drop-menu"></select></dd></dl>
+            <dl class="fill_single"><dt>当前版本<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="version" /></dd></dl>
+            <dl class="fill_single"><dt>下载链接<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="Url" /></dd></dl>
+            <dl class="fill_single"><dt>是否需要更新<span class="requiredstyle">*</span>：</dt><dd><select ng-options="a.Id as a.Name for a in isNeedUpgrads" class="drop-menu" ng-model="isNeedUpgrad"></select></dd></dl>
+            <dl class="fill_single"><dt>是否强制更新<span class="requiredstyle">*</span>：</dt><dd><select ng-options="a.Id as a.Name for a in isForceds" class="drop-menu" ng-model="isForced"></select></dd></dl>
+
+            <div class="styleButton">
+                <input type="button" value="保存" class="btn_confirm" ng-click="AddOrUpdateVersion()">
+                <input type="button" value="取消" class="btn_cancel" id="closeBtn" ng-click="close()">
+            </div>
+        </div>
+    </div>
+</div>

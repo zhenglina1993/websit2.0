@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<bundle virtualPath="~/lib/jquery.js">
+  <include>
+  </include>
+  <style>
+  </style>
+  <script>
+    <file>~/lib/_js/jquery/jquery-2.1.4.js</file>
+  </script>
+</bundle>

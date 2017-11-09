@@ -1,0 +1,170 @@
+﻿<div class="wrapper col_100">
+    <ul class="breadcrumb panel">
+        <li><a onclick="javascript:history.back(-1);"><i class="fa fa-home"></i>返回</a></li>
+        <li><a>添加广告模板</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel">
+                <header class="panel-heading">
+                    添加广告模板
+                </header>
+                <div class="panel-body">
+                    <form class="form-horizontal" name="updateAdvert" role="form" novalidate>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-lg-2 col-sm-2 control-label">广告类型</label>
+                            <div class="col-lg-5 col-sm-5">
+                                <select class="form-control m-bot15" ng-model="type_id">
+                                    <option value="-1">请选择广告类型</option>
+                                    <option value="1">信息流</option>
+                                    <option value="2">名片</option>
+                                    <option value="3">二维码</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 信息流广告 -->
+                        <!--<div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">广告标题</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" placeholder="输入广告标题">
+                            </div>
+                        </div>-->
+                        <div ng-show="type_id=='1'">
+                            <div class="form-group">
+                                <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">广告图片</label>
+                                <div class="col-lg-5 col-sm-5">
+                                    <input ng-hide="type_id!='1'" accept="image/*" type="file" ngf-select ng-model="xx_file" ngf-max-size="10MB" required ngf-model-invalid="errorFile" ngf-validate="{width: {min: 720, max:720}, height: {min: 180, max: 180}}" />
+                                    <p class="text-danger " style="margin:12px 0;">尺寸：720 ×180像素</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">标题</label>
+                                <div class="col-lg-5 col-sm-5">
+                                    <input type="text" placeholder="输入广告标题" class="form-control" name="xx_title" ng-model="xx_title" ng-maxlength="20">
+                                    <span style="color:red" ng-show="updateAdvert.xx_title.$error.maxlength">标题长度不超过20</span>
+                                    <p class="help-block">20个汉字以内，仅限中文，字母，数字</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">链接</label>
+                                <div class="col-lg-5 col-sm-5">
+                                    <input type="text" placeholder="请输入相关链接" class="form-control" ng-model="xx_href" />
+                                    <p class="help-block">用于广告跳转的页面URL地址</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-sm-offset-2 col-lg-5 col-sm-5">
+                                    <input type="submit" value="保存模板" class="btn btn-danger" ng-click="updateEp_advert(xx_file)" ng-disabled="updateAdvert.xx_title.$invalid">
+                                    <input type="submit" value="重置" class="btn btn-default" ng-if="advert_id==0" ng-click="empty()">
+                                    <input type="submit" value="重置" class="btn btn-default" ng-if="advert_id>0" ng-click="GetEp_advert()">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 名片广告 -->
+                        <div ng-show="type_id=='2'">
+                            <div class="form-group">
+                                <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">广告图片</label>
+                                <div class="col-lg-5 col-sm-5">
+                                    <input ng-hide="type_id!='2'" accept="image/*" type="file" ngf-select ng-model="mp_file" ngf-max-size="10MB" required
+                                           ngf-model-invalid="errorFile" ngf-validate="{width: {min: 240, max:240}, height: {min: 240, max: 240}}" style="width: 300px" />
+                                    <p class="text-danger " style="margin:12px 0;">尺寸 240*240像素</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">名称</label>
+                                <div class="col-lg-5 col-sm-5">
+                                    <input type="text" placeholder="输入个人或产品名称" class="form-control" ng-model="mp_title" name="mp_title" ng-maxlength="20">
+                                    <span style="color:red" ng-show="updateAdvert.mp_title.$error.maxlength">标题长度不超过20</span>
+                                    <p class="help-block">20个汉字以内，仅限中文，字母，数字</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">简介</label>
+                                <div class="col-lg-5 col-sm-5">
+                                    <input type="text" placeholder="输入介绍" class="form-control" ng-model="mp_detail">
+                                    <p class="help-block">输入个人或产品的介绍</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">联系方式</label>
+                                <div class="col-lg-5 col-sm-5">
+                                    <input type="text" placeholder="输入联系方式" class="form-control" ng-model="mp_tel">
+                                    <p class="help-block">点击广告可直接给你拨打电话</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-sm-offset-2 col-lg-5 col-sm-5">
+                                    <input type="submit" value="保存模板" class="btn btn-danger" ng-click="updateEp_advert(mp_file)" ng-disabled="updateAdvert.mp_title.$invalid">
+                                    <input type="submit" value="重置" class="btn btn-default" ng-if="advert_id==0" ng-click="empty()">
+                                    <input type="submit" value="重置" class="btn btn-default" ng-if="advert_id>0" ng-click="GetEp_advert()">
+                                </div>
+                            </div>
+                        </div>
+                        <!--二维码广告  -->
+                        <div ng-show="type_id=='3'">
+                            <div class="form-group">
+                                <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">二维码图片</label>
+                                <div class="col-lg-5 col-sm-5">
+                                    <input ng-hide="type_id!='3'" accept="image/*" type="file" ngf-select ng-model="qr_file" ngf-max-size="10MB" required
+                                           ngf-model-invalid="errorFile" ngf-validate="{width: {min: 240, max:240}, height: {min: 240, max: 240}}" style="width: 300px" />
+                                    <p class="text-danger " style="margin:12px 0;">尺寸 240*240像素</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">标题</label>
+                                <div class="col-lg-5 col-sm-5">
+                                    <input type="text" placeholder="输入广告标题" class="form-control" ng-model="qrcode_title" name="qrcode_title" ng-maxlength="20">
+                                    <span style="color:red" ng-show="updateAdvert.qrcode_title.$error.maxlength">标题长度不超过20</span>
+                                    <p class="help-block">20个汉字以内，仅限中文，字母，数字</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">介绍</label>
+                                <div class="col-lg-5 col-sm-5">
+                                    <input type="text" placeholder="输入二维码介绍" class="form-control" ng-model="qrcode_detail">
+                                    <p class="help-block">输入二维码介绍</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-sm-offset-2 col-lg-5 col-sm-5">
+                                    <input type="submit" value="保存模板" class="btn btn-danger" ng-click="updateEp_advert(qr_file)" ng-disabled="updateAdvert.qrcode_title.$invalid">
+                                    <input type="submit" value="重置" class="btn btn-default" ng-if="advert_id==0" ng-click="empty()">
+                                    <input type="submit" value="重置" class="btn btn-default" ng-if="advert_id>0" ng-click="GetEp_advert()">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="margin-top: 40px;display:none;">
+            <div>
+                <div class="panel-body">
+                    <div class="phone-model">
+                        <div class="phone-headset"></div>
+                        <div class="phone-screen" ng-style="{'background-color':config.bgcolor}">
+                            <div class="design-preview">
+                                <div class="wp-config">
+                                    <div class="wp-comp">
+                                        <h1><span class="ng-binding"></span></h1>
+                                    </div>
+                                </div>
+                                <div ui-sortable="sortableTpls" ng-model="slices" class="wp-comps ng-pristine ng-untouched ng-valid" style="min-height: 450px;">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="phone-home"></div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="maskWrap">
+    <div class="countmask">
+
+    </div>
+</div>

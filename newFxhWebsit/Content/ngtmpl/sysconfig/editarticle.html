@@ -1,0 +1,42 @@
+﻿<div class="wrapper col_100">
+    <ul class="breadcrumb panel">
+        <li><a><i class="fa fa-home"></i>修改文章数据</a></li>
+    </ul>
+
+    <div class="row" style="margin-left:30px;margin-right:30px">
+        <section class="panel">
+            <header class="panel-heading">
+                修改文章数据
+            </header>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>输入分享的文章链接</label>
+                    <div class="form-group">
+                        <input id="searchValue" placeholder="分享的文章链接" type="text" ng-model="articleurl" autocomplete="off" class="form-control" />
+                    </div>
+                    <input id="searchBtn" type="submit" value="搜索" ng-click="search()" class="btn btn-danger" />
+                </div>
+
+                <div class="zhezhao" ng-show="show">
+                    <div class="Mask  modal-dialog">
+                        <div class="styleCurrentLocal"><b>文章信息</b></div>
+                        <div class="styleFillList">
+                            <!--<dl class="fill_single"><dt>ID：</dt><dd></dd></dl>-->
+                            <dl class="fill_single"><dt>文章标题：</dt><dd style="padding:9px 0">{{list[0].title}}</dd></dl>
+                            <dl class="fill_single"><dt>文章概述：</dt><dd style="padding:9px 0">{{list[0].summary}}</dd></dl>
+                            <dl class="fill_single"><dt>文章作者：</dt><dd style="padding:9px 0">{{list[0].author}}</dd></dl>
+                            <dl class="fill_single"><dt>文章发布者：</dt><dd style="padding:9px 0">{{list[0].member_name}}</dd></dl>
+                            <dl class="fill_single"><dt>曝光量：</dt><dd><input type="text" ng-model="look_num" style="width:300px" value="{{list[0].look_num}}" /></dd></dl>
+                            <dl class="fill_single"><dt>点击量：</dt><dd><input type="text" ng-model="click_num" style="width:300px" value="{{list[0].click_num}}" /></dd></dl>
+                            <dl class="fill_single"><dt>转发量：</dt><dd><input type="text" ng-model="trans_num" style="width:300px" value="{{list[0].trans_num}}" /></dd></dl>
+                            <div class="styleButton">
+                                <input type="button" value="保存" class="btn_confirm" ng-click="saveedit()">
+                                <input type="button" value="取消" class="btn_cancel" id="closeBtn" ng-click="close()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

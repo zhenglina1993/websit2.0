@@ -1,0 +1,159 @@
+﻿<div class="wrapper">
+    <ul class="breadcrumb panel">
+        <li><a><i class="fa fa-home"></i>文件</a></li>
+    </ul>
+    <div class="panel">
+        <div ng-if="admin" class="panel-heading">
+            <div class="form-inline">
+                <input type="button" class="btn btn-danger" ng-click="open()" value="我要上传" />
+            </div>
+        </div>
+        <div class="panel-body">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                <tr>
+                    <th>文件名</th>
+                    <th ng-if="admin">下载权限</th>
+                    <th ng-if="admin">下载次数</th>
+                    <th>上传时间</th>
+                    <th ng-if="admin">权重</th>
+                    <th>备注</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="item in list">
+                    <td>{{item.file_name}}</td>
+                    <td ng-if="admin">{{item.power}}</span></td>
+                    <td ng-if="admin">{{item.download_numbel}}</td>
+                    <td>{{item.creat_at|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td ng-if="admin">{{item.sequence}}</td>
+                    <td>{{item.remark}}</td>
+                    <td>
+                        <input type="button" value="下载" ng-click="download(item.id)" class="btn btn-success" />
+                        <input ng-if="admin" type="button" name="" class="btn btn-danger" ng-click="delete(item.id)" value="删除" />
+                        <input ng-if="admin" type="button" class="btn btn-info" ng-click="isEditopen(item)" value="编辑" />
+                    </td>
+                </tr>
+            </table>
+            <div class="CountTotal">
+                <div class="dataTables_paginate paging_bootstrap pagination">
+                    <ul>
+                        <li><a href="javascript:void(0)" ng-click="pager.pre()">上一页</a></li>
+                        <li ng-repeat="item in pager.list">
+                            <a href="javascript:void(0)" ng-if="item.text =='.'">{{item.text}}</a>
+                            <a href="javascript:void(0)" ng-if="item.text != '.'&& !item.disabled " class="c_page">{{item.text}}</a>
+                            <a href="javascript:void(0)" ng-if="item.text != '.'&& item.disabled" ng-click="pager.go(item.index)">{{item.text}}</a>
+                        </li>
+                        <li><a href="javascript:void(0)" ng-click="pager.next()">下一页</a></li>
+                    </ul>
+                </div>
+                <span>共<b>{{count}}</b>条记录</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="zhezhao" ng-show="isShow">
+    <div class=" Mask  modal-dialog">
+        <div class="styleCurrentLocal"><b>上传文件</b></div>
+        <div class="styleFillList">
+            <dl class="fill_single">
+                <dt>文件名<span class="requiredstyle">*</span>：</dt>
+                <dd>
+                    <input type="text" ng-model="title" value="" placeholder="{{uploadInfo.title}}" />
+                </dd>
+            </dl>
+            <dl class="fill_single">
+                <dt>上传资料<span class="requiredstyle">*</span>：</dt>
+                <dd>
+                    <input type="file" name="fileUpload" id="fileUpload" class="default" />
+                </dd>
+            </dl>
+            <dl class="fill_single">
+                <dt>权限设置<span class="requiredstyle">*</span>：</dt>
+                <dd>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="power" value="1">
+                        城市合伙人
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="power" value="2">
+                        代理商
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="power" value="0">
+                        企业版
+                    </label>
+                </dd>
+            </dl>
+            <dl class="fill_single">
+                <dt>排序权重：</dt>
+                <dd>
+                    <input type="text" ng-model="sequence" value="" />
+                </dd>
+            </dl>
+            <dl class="fill_single">
+                <dt>备注：</dt>
+                <dd>
+                    <textarea rows="6" ng-model="remark" class="form-control" placeholder="{{uploadInfo.remark}}"></textarea>
+                </dd>
+            </dl>
+            <dl ng-show="start" class="fill_single">
+                <dt>进度：</dt>
+                <dd>
+                    <progress id="progressBar" value="0" max="100" style="width: 300px;"></progress>
+                    <span id="percentage"></span><span id="time"></span>
+                </dd>
+            </dl>
+            <div class="styleButton">
+                <input type="button" class="btn btn-danger" ng-click="upload()" value="上传文件" />
+                <input type="button" class="btn " ng-click="close()" value="取消" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="zhezhao" ng-show="isEdit">
+    <div class=" Mask  modal-dialog">
+        <div class="styleCurrentLocal"><b>编辑文件信息</b></div>
+        <div class="styleFillList">
+            <dl class="fill_single">
+                <dt>文件名：</dt>
+                <dd>
+                    <input type="text" ng-model="title" value="" placeholder="{{temp_item.file_name}}" />
+                </dd>
+            </dl>
+            <dl class="fill_single">
+                <dt>权限设置：</dt>
+                <dd>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="temp_power" value="1">
+                        城市合伙人
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="temp_power" value="2">
+                        代理商
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="temp_power" value="0">
+                        企业版
+                    </label>
+                </dd>
+            </dl>
+            <dl class="fill_single">
+                <dt>排序权重：</dt>
+                <dd>
+                    <input type="text" ng-model="sequence" value="" placeholder="数值大靠前" />
+                </dd>
+            </dl>
+            <dl class="fill_single">
+                <dt>备注：</dt>
+                <dd>
+                    <textarea rows="6" ng-model="remark" class="form-control" placeholder="{{temp_item.remark}}"></textarea>
+                </dd>
+            </dl>
+            <div class="styleButton">
+                <input type="button" class="btn btn-danger" ng-click="edit()" value="修改信息" />
+                <input type="button" class="btn " ng-click="isEditclose()" value="取消" />
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,43 @@
+.webuploader-container {
+	position: relative; float:left;
+}
+.webuploader-element-invisible {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+.webuploader-pick {
+	position: relative;
+	display: inline-block;
+    padding: 9px 14px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #333;
+    text-shadow: 0 1px 1px rgba(255,255,255,.75);
+    background-color: #f8f8f8;
+    background-image: -moz-linear-gradient(top,#f8f8f8,#f0f0f0);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#f8f8f8),to(#f0f0f0));
+    background-image: -webkit-linear-gradient(top,#f8f8f8,#f0f0f0);
+    background-image: -o-linear-gradient(top,#f8f8f8,#f0f0f0);
+    background-image: linear-gradient(to bottom,#f8f8f8,#f0f0f0);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    border: 1px solid #c3c3c3;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+   
+}
+.webuploader-pick-hover {
+	background: #f1f1f1;
+}
+
+.webuploader-pick-disable {
+	opacity: 0.6;
+	pointer-events:none;
+}
+.webup_img{width:70px; height:40px; display:inline-block; border-radius:2px; margin-right:5px; float:left}

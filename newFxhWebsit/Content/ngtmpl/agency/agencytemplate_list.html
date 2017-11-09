@@ -1,0 +1,341 @@
+﻿<div class="wrapper">
+    <ul class="breadcrumb panel">
+        <li><a><i class="fa fa-home"></i>企业模板管理</a></li>
+    </ul>
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="panel">
+                <div class="panel-heading">
+
+                    <input type="button" value="新增推广模板 " class="btn btn-danger pull-left" ng-click="open()" style="margin-right:12px;" />
+                    <!--<div class="checkboxWrap">
+                        <input type="checkbox" ng-checked="is_force" ng-click="checkboxChange('all')" />
+                        <span>锁定顶/底部模板</span>
+                    </div>-->
+                </div>
+
+
+                <div class="panel-body">
+                    <h5><b>顶部推广</b></h5>
+                    <div class="checkboxWrap fr">
+                        <input type="checkbox" ng-checked="is_force_top" ng-click="checkboxChange('top')" />
+                        <span>
+                            锁定顶部模板
+                            <div class="tiptool">
+                                <div class="fa fa-exclamation-circle"></div>
+                                <div class="tooltip left">
+                                    <div class="tooltip-arrow"></div>
+                                    <div class="tooltip-inner">
+                                         若勾选此项，则员工在App中将无法编辑顶部模板
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                        <tr>
+                            <th>推广名称</th>
+                            <th width="40%">推广图片</th>
+                            <th>推广类型</th>
+                            <th>添加时间</th>
+                            <!--<th>是否展示</th>-->
+                            <th>状态</th>
+                            <th class="clear_bg">
+                                操作
+                                <div class="tiptool">
+                                    <div class="fa fa-exclamation-circle"></div>
+                                    <div class="tooltip left">
+                                        <div class="tooltip-arrow"></div>
+                                        <div class="tooltip-inner">
+                                            【编辑】对已有的模板进行修改<br />
+                                            【启用/禁用】1、当模板锁定时，"启用"的模板将会显示在员工分享的文章当中,"禁用"则不显示;2、当模板未锁定时，无论该模板是否启用，员工都可从"企业模板"中选择。<br />
+                                            【删除】将模板从企业模板中删除，该操作不可撤回，谨慎操作。
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr ng-repeat="item in toplist">
+                            <td>{{item.advert_name}}</td>
+                            <td><img src="{{item.advert_pic}}" /> </td>
+                            <td>{{item.advert_type}}</td>
+                            <td>{{item.create_dt}}</td>
+                            <!--<td>{{item.is_carousel=="0"?"否":"是"}}</td>-->
+                            <td>{{item.status==0?"禁用":"启用"}}</td>
+                            <td class="td_handle">
+                                <input type="checkbox" ng-checked="item.status==1" ng-click="UpdateStatus(item,(item.status==0?1:0))" />
+                                <a href="javascript:void(0)" ng-click="openEdit(item.advert_id)">编辑</a>
+                                <!--<a href="javascript:void(0)" ng-show="item.status==0" ng-click="UpdateStatus(item,1)">启用</a>
+                                <a href="javascript:void(0)" ng-show="item.status==1" ng-click="UpdateStatus(item,0)">禁用</a>-->
+                                <a href="javascript:void(0)" ng-click="DeleteTemplate(item.advert_id)">删除</a>
+                                <!--<i class="up" ng-click="UpdateTemplateOrdernum(item.advert_id,'Move')"></i>
+                                <i class="down" ng-click="UpdateTemplateOrdernum(item.advert_id,'Down')"></i>-->
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <h5><b>底部推广</b></h5>
+                    <div class="checkboxWrap fr">
+                        <input type="checkbox" ng-checked="is_force_bottom" ng-click="checkboxChange('bottom')" />
+                        <span>锁定底部模板
+                            <div class="tiptool">
+                                <div class="fa fa-exclamation-circle"></div>
+                                <div class="tooltip left">
+                                    <div class="tooltip-arrow"></div>
+                                    <div class="tooltip-inner">
+                                        若勾选此项，则员工在App中将无法编辑底部模板
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                        <tr>
+                            <th>推广名称</th>
+                            <th width="40%">推广图片</th>
+                            <th>推广类型</th>
+                            <th>添加时间</th>
+                            <!--<th>是否展示</th>-->
+                            <th>状态 </th>
+                            <th class="clear_bg">
+                                操作
+                                <div class="tiptool">
+                                    <div class="fa fa-exclamation-circle"></div>
+                                    <div class="tooltip right">
+                                        <div class="tooltip-arrow"></div>
+                                        <div class="tooltip-inner">
+                                            【编辑】对已有的模板进行修改<br />
+                                            【启用/禁用】1、当模板锁定时，"启用"的模板将会显示在员工分享的文章当中,"禁用"则不显示;2、当模板未锁定时，无论该模板是否启用，员工都可从"企业模板"中选择。<br />
+                                            【删除】将模板从企业模板中删除，该操作不可撤回，谨慎操作。
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr ng-repeat="item in bottomlist">
+                            <td>{{item.advert_name}}</td>
+                            <td><img src="{{item.advert_pic}}" /></td>
+                            <td>{{item.advert_type}}</td>
+                            <td>{{item.create_dt}}</td>
+                            <!--<td>{{item.is_carousel=="0"?"否":"是"}}</td>-->
+                            <td>{{item.status==0?"禁用":"启用"}}</td>
+                            <td class="td_handle">
+                                <input type="checkbox" ng-checked="item.status==1" ng-click="UpdateStatus(item,(item.status==0?1:0))" />
+                                <a href="javascript:void(0)" ng-click="openEdit(item.advert_id)">编辑</a>
+                                <!--<a href="javascript:void(0)" ng-show="item.status==0" ng-click="UpdateStatus(item,1)">启用</a>
+                                <a href="javascript:void(0)" ng-show="item.status==1" ng-click="UpdateStatus(item,0)">禁用</a>-->
+                                <a href="javascript:void(0)" ng-click="DeleteTemplate(item.advert_id)">删除</a>
+                                <!-- up and down -->
+                                <!--<i class="up" ng-click="UpdateTemplateOrdernum(item.advert_id,'Move')"></i>
+                                <i class="down" ng-click="UpdateTemplateOrdernum(item.advert_id,'Down')"></i>-->
+                            </td>
+                        </tr>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="zhezhao" ng-show="isShow">
+    <form id="form1">
+        <div class=" Mask modal-dialog">
+            <div class="styleCurrentLocal"><b>新增模板</b></div>
+            <div class="styleFillList">
+
+                <dl class="fill_single"><dt>模板名称：</dt><dd><input type="text" ng-model="advertname" /></dd></dl>
+                <dl class="fill_single">
+                    <dt>模板类型<span class="requiredstyle">*</span>：</dt>
+                    <dd>
+                        <select ng-model="advertposition" class="drop-menu" ng-change="positionschange()">
+                            <option ng-repeat="(key, value) in advertpositions" ng-selected="advertposition==key" ng-model="key" value="{{key}}">{{value}}</option>
+                        </select>
+                    </dd>
+                </dl>
+                <dl ng-show="advertposition!=0" class="fill_single">
+                    <dt>推广类型<span class="requiredstyle">*</span>：</dt>
+                    <dd>
+                        <select ng-model="advertTypeId" class="drop-menu">
+                            <option ng-repeat="(key, value) in advertTypes" ng-selected="advertTypeId==key" ng-model="key" value="{{key}}">{{value}}</option>
+                        </select>
+                    </dd>
+                </dl>
+                <!--通栏推广-->
+                <div ng-show="advertTypeId==1">
+                    <dl class="fill_single">
+                        <dt>推广图片<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <!--<input ng-hide="imgpath!=undefined && imgpath!=''" accept="image/*" type="file" ngf-select ng-model="file" ngf-max-size="10MB" required
+                                   ngf-model-invalid="errorFile" ngf-change="uploadImg(file,0)" style="width: 300px" />-->
+                            <input accept="image/*" type="file" ngf-select ng-model="file" ng-hide="imgpath!=undefined && imgpath!=''" ngf-max-size="5MB" required
+                                   ngf-model-invalid="errorFile" ngf-change="uploadImg(file,0)" /> <!--ngf-validate="{width: {min: 720, max:720}, height: {min: 180, max: 180}}"-->
+                            <div ng-show="imgpath!=undefined && imgpath!=''" class="imgclose">
+                                <img src="{{imgpath}}" style="float:left;width:auto;height:auto;max-width:375px;max-height:330px" /><i ng-click="clearImg(0)"></i>
+                            </div>
+                            <p style="margin:12px 0;">建议尺寸：720 ×180像素</p>
+                        </dd>
+                    </dl>
+                    <dl class="fill_single"><dt>链接地址<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="href" style="width:300px" /></dd></dl>
+                </div>
+                <!--图文推广-->
+                <div ng-show="advertTypeId==2">
+                    <dl class="fill_single">
+                        <dt>推广图片<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <input accept="image/*" type="file" ngf-select ng-model="file" ng-hide="imgpath!=undefined && imgpath!=''" ngf-max-size="5MB" required
+                                   ngf-model-invalid="errorFile" ngf-change="uploadImg(file,0)" /> <!--ngf-validate="{width: {min: 320, max:320}, height: {min: 320, max: 320}}"-->
+                            <div ng-show="imgpath!=undefined && imgpath!=''" class="imgclose">
+                                <img src="{{imgpath}}" style="float:left;width:auto;height:auto;max-width:375px;max-height:330px" /><i ng-click="clearImg(0)"></i>
+                            </div>
+                            <p style="margin:12px 0;">建议尺寸：320 ×320像素</p>
+                        </dd>
+                    </dl>
+                    <dl class="fill_single"><dt>产品或服务名称<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="name" style="width:300px" /></dd></dl>
+                    <dl class="fill_single"><dt>描述<span class="requiredstyle">*</span>：</dt><dd><input multiple="multiple" type="text" ng-model="des" style="width:300px" /></dd></dl>
+                    <dl class="fill_single"><dt>链接地址<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="href" style="width:300px" /></dd></dl>
+                </div>
+                <!--名片推广-->
+                <div ng-show="advertTypeId==3">
+                    <dl class="fill_single"><dt>姓名<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="name" style="width:300px" /></dd></dl>
+                    <dl class="fill_single">
+                        <dt>头像<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <input accept="image/*" type="file" ngf-select ng-model="file" ng-hide="imgpath!=undefined && imgpath!=''" ngf-max-size="5MB" required
+                                   ngf-model-invalid="errorFile" ngf-change="uploadImg(file,0)" /><!--ngf-validate="{width: {min: 320, max:320}, height: {min: 320, max: 320}}"-->
+                            <div ng-show="imgpath!=undefined && imgpath!=''" class="imgclose">
+                                <img src="{{imgpath}}" style="float:left;width:auto;height:auto;max-width:375px;max-height:330px" /><i ng-click="clearImg(0)"></i>
+                            </div>
+                            <p style="margin:12px 0;">建议尺寸：320 ×320像素</p>
+                        </dd>
+                    </dl>
+                    <dl class="fill_single"><dt>电话号码<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="mobile" style="width:300px" /></dd></dl>
+                    <dl class="fill_single"><dt>联系地址<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="address" style="width:300px" /></dd></dl>
+                </div>
+                <!--二维码推广-->
+                <div ng-show="advertTypeId==4">
+                    <dl class="fill_single"><dt>二维码名称<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="name" style="width:300px" /></dd></dl>
+                    <dl class="fill_single">
+                        <dt>二维码<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <input accept="image/*" type="file" ngf-select ng-model="file" ng-hide="imgpath!=undefined && imgpath!=''" ngf-max-size="5MB" required
+                                   ngf-model-invalid="errorFile" ngf-change="uploadImg(file,0)" /> <!--ngf-validate="{width: {min: 320, max:320}, height: {min: 320, max: 320}}"-->
+                            <div ng-show="imgpath!=undefined && imgpath!=''" class="imgclose">
+                                <img src="{{imgpath}}" style="float:left;width:auto;height:auto;max-width:375px;max-height:330px" /><i ng-click="clearImg(0)"></i>
+                            </div>
+                            <p style="margin:12px 0;">建议尺寸：320 ×320像素</p>
+                        </dd>
+                    </dl>
+                    <dl class="fill_single"><dt>介绍<span class="requiredstyle">*</span>：</dt><dd><input multiple="multiple" type="text" ng-model="des" style="width:300px" /></dd></dl>
+                </div>
+                <!--QQ-->
+                <div ng-show="advertTypeId==5">
+                    <dl class="fill_single"><dt>QQ昵称<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="name" style="width:300px" /></dd></dl>
+                    <dl class="fill_single"><dt>QQ号<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="QQ" style="width:300px" /></dd></dl>
+                    <dl class="fill_single">
+                        <dt>QQ头像<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <input accept="image/*" type="file" ngf-select ng-model="file" ng-hide="imgpath!=undefined && imgpath!=''" ngf-max-size="5MB" required
+                                   ngf-model-invalid="errorFile" ngf-change="uploadImg(file,0)" /> <!--ngf-validate="{width: {min: 320, max:320}, height: {min: 320, max: 320}}"-->
+                            <div ng-show="imgpath!=undefined && imgpath!=''" class="imgclose">
+                                <img src="{{imgpath}}" style="float:left;width:auto;height:auto;max-width:375px;max-height:330px" /><i ng-click="clearImg(0)"></i>
+                            </div>
+                            <p style="margin:12px 0;">建议尺寸：320 ×320像素</p>
+                        </dd>
+                    </dl>
+                    <dl class="fill_single"><dt>介绍<span class="requiredstyle">*</span>：</dt><dd><input multiple="multiple" type="text" ng-model="des" style="width:300px" /></dd></dl>
+                </div>
+                <!--店铺推广-->
+                <div ng-show="advertTypeId==6">
+                    <dl class="fill_single"><dt>产品名称<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="productname" style="width:300px" /></dd></dl>
+                    <dl class="fill_single"><dt>价格<span class="requiredstyle">*</span>：</dt><dd><input type="number" ng-model="price" style="width:300px" /></dd></dl>
+                    <dl class="fill_single">
+                        <dt>产品图片<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <input accept="image/*" type="file" ngf-select ng-model="productfile" ng-hide="imgpathproduct!=undefined && imgpathproduct!=''" ngf-max-size="5MB" required
+                                   ngf-model-invalid="errorFile" ngf-change="uploadImg(productfile,1)" /><!--ngf-validate="{width: {min: 320, max:320}, height: {min: 320, max: 320}}"-->
+                            <div ng-show="imgpathproduct!=undefined && imgpathproduct!=''" class="imgclose">
+                                <img src="{{imgpathproduct}}" style="float:left;width:auto;height:auto;max-width:375px;max-height:330px" /><i ng-click="clearImg(1)"></i>
+                            </div>
+                            <p style="margin:12px 0;">建议尺寸：320 ×320像素</p>
+                        </dd>
+                    </dl>
+                    <dl class="fill_single"><dt>产品链接<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="href" style="width:300px" /></dd></dl>
+                    <dl class="fill_single"><dt>店铺或公司名称<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="ownername" style="width:300px" /></dd></dl>
+                    <dl class="fill_single">
+                        <dt>店主头像<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <input accept="image/*" type="file" ngf-select ng-model="ownerfile" ng-hide="imgpathowner!=undefined && imgpathowner!=''" ngf-max-size="5MB" required
+                                   ngf-model-invalid="errorFile" ngf-change="uploadImg(ownerfile,2)" /> <!--ngf-validate="{width: {min: 320, max:320}, height: {min: 320, max: 320}}"-->
+                            <div ng-show="imgpathowner!=undefined && imgpathowner!=''" class="imgclose">
+                                <img src="{{imgpathowner}}" style="float:left;width:auto;height:auto;max-width:375px;max-height:330px" /><i ng-click="clearImg(2)"></i>
+                            </div>
+                            <p style="margin:12px 0;">建议尺寸：320 ×320像素</p>
+                        </dd>
+                    </dl>
+                    <dl class="fill_single"><dt>>联系电话<s<span class="requiredstyle">*</span>：</dt><dd><input type="number" ng-model="mobile" style="width:300px" /></dd></dl>
+                </div>
+                <!--<dl class="fill_single">
+                    <dt>是否轮播：</dt>
+                    <dd>
+                        <select ng-model="is_carousel" class="drop-menu">
+                            <option ng-repeat="(key, value) in carousel" ng-selected="is_carousel==key" ng-model="key" value="{{key}}">{{value}}</option>
+                        </select>
+                    </dd>
+                </dl>-->
+                <!--大图广告-->
+                <div ng-show="advertTypeId==8">
+                    <dl class="fill_single">
+                        <dt>推广图片<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <!--<input ng-hide="imgpath!=undefined && imgpath!=''" accept="image/*" type="file" ngf-select ng-model="file" ngf-max-size="10MB" required
+                            ngf-model-invalid="errorFile" ngf-change="uploadImg(file,0)" style="width: 300px" />-->
+                            <input accept="image/*" type="file" ngf-select ng-model="file" ng-hide="imgpath!=undefined && imgpath!=''" ngf-max-size="5MB" required
+                                   ngf-model-invalid="errorFile" ngf-change="uploadImg(file,0)" /> <!--ngf-validate="{width: {min: 720, max:720}, height: {min: 180, max: 180}}"-->
+                            <div ng-show="imgpath!=undefined && imgpath!=''" class="imgclose">
+                                <img src="{{imgpath}}" style="float:left;width:auto;height:auto;max-width:375px;max-height:330px" /><i ng-click="clearImg(0)"></i>
+                            </div>
+                            <p style="margin:12px 0;">建议尺寸：750 ×300像素</p>
+                        </dd>
+                    </dl>
+                    <dl class="fill_single">
+                        <dt>点击效果<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <select class="drop-menu" ng-model="dt_action">
+                                <option value="1" ng-selected="dt_action==1">跳转链接</option>
+                                <option value="2" ng-selected="dt_action==2">拨打电话</option>
+                                <option value="3" ng-selected="dt_action==3">QQ对话</option>
+                            </select>
+                        </dd>
+                    </dl>
+                    <dl class="fill_single">
+                        <dt>{{dt_action==1?"链接地址":dt_action==2?"电话":dt_action==3?"QQ":""}}<span class="requiredstyle">*</span>：</dt>
+                        <dd><input type="text" ng-model="href" style="width:300px" /></dd>
+                    </dl>
+                </div>
+                <div ng-show="advertTypeId==7">
+                    <dl class="fill_single">
+                        <dt>视频广告图片<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <!--<input ng-hide="imgpath!=undefined && imgpath!=''" accept="image/*" type="file" ngf-select ng-model="file" ngf-max-size="10MB" required
+                       ngf-model-invalid="errorFile" ngf-change="uploadImg(file,0)" style="width: 300px" />-->
+                            <input accept="image/*" type="file" ngf-select ng-model="file" ng-hide="imgpath!=undefined && imgpath!=''" ngf-max-size="5MB" required
+                                   ngf-model-invalid="errorFile" ngf-change="uploadImg(file,0)" /> <!--ngf-validate="{width: {min: 720, max:720}, height: {min: 180, max: 180}}"-->
+                            <div ng-show="imgpath!=undefined && imgpath!=''" class="imgclose">
+                                <img src="{{imgpath}}" style="float:left;width:auto;height:auto;max-width:375px;max-height:330px" /><i ng-click="clearImg(0)"></i>
+                            </div>
+                            <p style="margin:12px 0;">建议尺寸：750 ×420像素</p>
+                        </dd>
+                    </dl>
+                    <dl class="fill_single"><dt>链接地址<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="href" style="width:300px" /></dd></dl>
+                </div>
+                <div class="styleButton">
+                    <button ng-click="AddAgencyTemplate()" class="btn btn_confirm">提交</button>
+                    <input type="button" value="取消" class="btn btn_cancel" ng-click="close()">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

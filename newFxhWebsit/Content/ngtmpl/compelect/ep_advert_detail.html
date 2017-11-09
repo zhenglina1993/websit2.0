@@ -1,0 +1,95 @@
+﻿<div class="wrapper">
+    <ul class="breadcrumb panel">
+        <li ng-hide="agency_id==0"><a onclick="javascript:history.back(-1);"><i class="fa fa-home"></i>返回</a></li>
+        <li><a><i class="fa fa-home"></i>查看互推模板</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="panel">
+                <div class="panel-body extra-pad">
+                    <div class="col-sm-4 col-xs-4">
+                        <div class="v-value">
+                            <h2>{{ep.num_look}}</h2>
+                        </div>
+                        <div id="visit-1"></div>
+                        <div class="v-info">
+                            总曝光
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-4">
+                        <div class="v-value">
+                            <h2>{{ep.num_click}}</h2>
+                        </div>
+                        <div id="visit-2"></div>
+                        <div class="v-info">
+                            总点击
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-4">
+                        <div class="v-value">
+                            <h2>{{(ep.num_look!=0?(ep.num_click/ep.num_look)*100:0).toFixed(2)}}%</h2>
+                        </div>
+                        <div id="visit-2"></div>
+                        <div class="v-info">
+                            点击率
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <section class="panel">
+                <header class="panel-heading">
+                    基本信息
+                </header>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-lg-2 col-sm-2 control-label">广告类型：</label>
+                            <div class="col-lg-10">
+                                <p class="help-block">{{ep.advert_type_id==1?"信息流":ep.advert_type_id==2?"名片":ep.advert_type_id==3?"二维码":""}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">图片：</label>
+                            <div class="col-lg-10">
+                                <img src="{{advert_detail.pic}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">标题：</label>
+                            <div class="col-lg-10">
+                                <p class="help-block">{{advert_detail.title}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="ep.advert_type_id==1">
+                            <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">链接：</label>
+                            <div class="col-lg-10">
+                                <p class="help-block"><a href="{{advert_detail.href}}" target="_blank">{{advert_detail.href}}</a></p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="ep.advert_type_id==2 || ep.advert_type_id==3">
+                            <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">简介：</label>
+                            <div class="col-lg-10">
+                                <p class="help-block">{{advert_detail.detail}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="ep.advert_type_id==3">
+                            <label for="exampleInputFile2" class="col-lg-2 col-sm-2 control-label">联系方式：</label>
+                            <div class="col-lg-10">
+                                <p class="help-block">{{advert_detail.tel}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-danger" ng-click="UpdateEp_advert_state(advert_id,0)">停用</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

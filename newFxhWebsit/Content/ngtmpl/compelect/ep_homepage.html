@@ -1,0 +1,175 @@
+﻿<div ng-show="stateInfo.ep_disabled==1">
+    <div class="wrapper col_100 Default">
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="panel">
+                    <div class="panel-body text-center">
+                        <img src="../Content/Images/default1.png" />
+                        <h4>
+                            您还未开通企业互推，请联系<span>{{stateInfo.company_name}}</span>开通。
+                        </h4>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="wrapper" ng-show="stateInfo.ep_disabled==0">
+    <ul class="breadcrumb panel">
+        <li ng-hide="agency_id==0"><a onclick="javascript:history.back(-1);"><i class="fa fa-home"></i>返回</a></li>
+        <li><a><i class="fa fa-home" ng-show="agency_id==0"></i>企业互推信息</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="panel">
+                <header class="panel-heading ng-binding">
+                    <span class="pull-left">企业互推</span>
+                </header>
+                <div class="panel-body extra-pad">
+                    <div class="col-sm-3 col-xs-3">
+                        <div class="v-value">
+                            <h2>{{Data.look_num}}</h2>
+                        </div>
+                        <div id="visit-1"></div>
+                        <div class="v-info">
+                            总曝光
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-3">
+                        <div class="v-value">
+                            <h2>{{Data.click_num}}</h2>
+                        </div>
+                        <div id="visit-2"></div>
+                        <div class="v-info">
+                            总点击
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-3">
+                        <div class="v-value">
+                            <h2>{{Data.click_rate}} %</h2>
+                        </div>
+                        <div id="visit-2"></div>
+                        <div class="v-info">
+                            点击率
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-3">
+                        <div class="v-value">
+                            <h2>{{Data.advert_money}}</h2>元
+                        </div>
+                        <div id="visit-2"></div>
+                        <div class="v-info">
+                            节省广告费
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="panel">
+                <header class="panel-heading ng-binding">正在互推</header>
+                <div class="panel-body">
+                    <!--还没有互推企业的时候  -->
+                    <div class="convie_nocomp" ng-hide="Data.advertinglist.length>0">
+                        <p class="text-center">当前没有正在互推的广告</p>
+                        <p class="text-center text-danger">请从广告模板中选择要互推的广告</p>
+                    </div>
+                    <!-- 有互推数据 -->
+                    <div class="convie_comp" ng-show="Data.advertinglist.length>0">
+                        <ul class="list-unstyled convie_complist">
+                            <li ng-repeat="item in Data.advertinglist">
+                                <div class="col-sm-2  col-xs-2 col-md-2">
+                                    <img src="{{item.pic}}" width="100%">
+                                </div>
+                                <div class="col-sm-2  col-xs-2">
+                                    <h5><b>{{item.title}}</b></h5>
+                                    <p>{{item.type_name}}</p>
+                                </div>
+                                <div class="col-sm-3 col-xs-3">
+                                    <p>开始投放时间：{{item.delivery_dt}}</p>
+                                    <p>已投放：{{item.long_time}}</p>
+                                </div>
+                                <div class="col-sm-2  col-xs-2">
+                                    <p>总曝光：{{item.look_num}}</p>
+                                    <p>总点击：{{item.click_num}}</p>
+                                </div>
+                                <div class="col-sm-3  col-xs-3">
+                                    <a href="javascript:void(0)" ng-click="UpdateEp_advert_state(item.advert_id,0)">停止互推</a>
+                                    <a href="javascript:void(0)" ng-click="ToEp_advert_data(item.advert_id)">查看互推数据</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="panel">
+                <header class="panel-heading ng-binding">广告模板 <a href="javascript:void(0)" ng-click="ToUpdateEp_Advert(0,agency_id)" ng-show="Data.advertlist.length>0" class="btn btn-info pull-right">添加</a></header>
+                <div class="panel-body">
+                    <div class="convie_nocomp" ng-hide="Data.advertlist.length>0">
+                        <!--还没有互推企业的时候  -->
+                        <p class="text-center">当前没有广告模板</p>
+                        <a href="javascript:void(0)" ng-click="ToUpdateEp_Advert(0,agency_id)" data-toggle="modal" class="btn btn-info">添加模板</a>
+                    </div>
+                    <!-- 有互推模板的状态 -->
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed" ng-show="Data.advertlist.length>0">
+                        <tbody>
+                            <tr>
+                                <th>图片</th>
+                                <th>标题</th>
+                                <th>类型</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr ng-repeat="item in Data.advertlist">
+                                <td><img src="{{item.pic}}" /></td>
+                                <td>{{item.title}}</td>
+                                <td>{{item.type_name}}</td>
+                                <td><span class="{{item.state_id==1?'text-success':'muted'}}">{{item.state_name}}</span></td>
+                                <td>
+                                    <a href="javascript:void(0)" ng-click="UpdateEp_advert_state(item.advert_id,0)" ng-show="item.state_id==1">停止互推</a>
+                                    <a href="javascript:void(0)" ng-click="ToEp_conditiom(item.advert_id)" ng-hide="item.state_id==1">互推</a>
+                                    <a href="javascript:void(0)" ng-click="ToUpdateEp_Advert(item.advert_id,agency_id)" ng-hide="item.state_id==1">编辑</a>
+                                    <!--<a href="javascript:void(0)" ng-click="UpdateEp_advert_state(item.advert_id,2)" ng-hide="item.state_id==1">删除</a>-->
+                                    <a href="javascript:void(0)" ng-click="Del_Ep_advert(item,agency_id)" ng-hide="item.state_id==1">删除</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 刚进入页面的时候的弹窗 -->
+
+<!--<div class="zhezhao" ng-show="Data.Is_fill_category">
+    <div class="cdmxtc_mdiv Mask  modal-dialog">
+        <div class="styleCurrentLocal"><b>欢迎使用企业互推功能</b></div>
+        <div class="modal-body">
+            <div class="modal-body">
+                <p class="text-center" style="width: 80%;margin:16px auto;">企业互推能帮助企业快速推广品牌和产品。为了推广更精准，开通此功能前请先设置企业所在的行业。</p>
+                <div class="col-sm-12 col-xs-12 ">
+                    <select class="form-control m-bot15" ng-model="ep_category_id">
+                        <option value="0">选择该公司的行业</option>
+                        <option ng-repeat="(key,value) in ep_categorys" ng-selected="{{key==ep_category_id}}" ng-model="key" value="{{key}}">{{value}}</option>
+                    </select>
+                </div>
+                <p class="text-center" style="width: 80%;margin:16px auto;color:red;">注意：企业行业一经设置，无法修改。</p>
+            </div>
+        </div>
+        <div class="styleButton">
+            <input type="button" value="保存" class="btn_confirm" ng-click="UpdateAgency_ep()">
+           
+        </div>
+    </div>
+</div>-->

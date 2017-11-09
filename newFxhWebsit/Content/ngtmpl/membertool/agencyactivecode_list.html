@@ -1,0 +1,57 @@
+﻿<div class="wrapper">
+    <ul class="breadcrumb panel">
+        <li><a><i class="fa fa-home"></i>激活码管理</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="form-inline">
+                        <input id="searchValue" class="form-control" placeholder="代理商手机号码" type="text" ng-model="memberMobile" autocomplete="off" />
+                        <input id="searchBtn" type="submit" value="搜索" ng-click="search()" class="btn btn-danger" />
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                        <tr>
+                            <th>ID</th>
+                            <th>激活码</th>
+                            <th>会员</th>
+                            <th>状态</th>
+                            <th>激活时间</th>
+                            <th>生成时间</th>
+                            <th class="clear_bg">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in list">
+                            <td>{{item.activeCodeId}}</td>
+                            <td>{{item.activeCode}}</td>
+                            <td>{{item.memberId}}</td>
+                            <td>{{item.status==0?"未使用":"已使用"}}</td>
+                            <td>{{item.activeDate}}</td>
+                            <td>{{item.createDate}}</td>
+                            <td class="td_handle">
+                                <a href="javascript:void(0)" ng-click="Tovoid(item.activeCodeId)">作废</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="CountTotal">
+                        <div class="dataTables_paginate paging_bootstrap pagination">
+                            <ul>
+                                <li><a href="javascript:void(0)" ng-click="pager.pre()">← 上一页</a></li>
+                                <li ng-repeat="item in pager.list">
+                                    <a href="javascript:void(0)" ng-if="item.text =='.'">{{item.text}}</a>
+                                    <a href="javascript:void(0)" ng-if="item.text != '.'&& !item.disabled " style="color:grey">{{item.text}}</a>
+                                    <a href="javascript:void(0)" ng-if="item.text != '.'&& item.disabled" ng-click="pager.go(item.index)">{{item.text}}</a>
+                                </li>
+                                <li><a href="javascript:void(0)" ng-click="pager.next()">下一页 → </a></li>
+                            </ul>
+                        </div>
+                        <span>共<b>{{count}}</b>条记录</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+</div>

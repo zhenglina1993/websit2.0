@@ -1,0 +1,126 @@
+﻿
+<div class="wrapper">
+    <ul class="breadcrumb panel">
+        <li><a onclick="javascript:history.back(-1);"><i class="fa fa-home"></i>返回</a></li>
+        <li><a>企业信息</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="panel">
+                <div class="panel-body extra-pad agencyinfo ">
+                    <h4 class="pros-title">{{ep.company}}</h4>
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-3">
+                            <div>行业</div>
+                            <p class="p-chart-title"><h4>{{ep.category_name}}</h4></p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>地区</div>
+                            <p class="p-chart-title"><h4>{{ep.city_name}}</h4></p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>规模</div>
+                            <p class="p-chart-title"><h4>{{ep.member_count}}</h4></p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>互推曝光</div>
+                            <p class="p-chart-title"><h4>{{ep.look_nums}}</h4></p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>互推点击</div>
+                            <p class="p-chart-title"><h4>{{ep.click_nums}}</h4></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="panel">
+                <header class="panel-heading ng-binding">互推模板</header>
+                <div class="panel-body">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                        <tbody>
+                            <tr>
+                                <th>图片</th>
+                                <th>标题</th>
+                                <th>类型</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr ng-repeat="item in ep.advert_list">
+                                <td><img src="{{item.pic}}"></td>
+                                <td>{{item.title}}</td>
+                                <td>{{item.type_name}}</td>
+                                <td><span class="{{item.state_id==1?'text-success':'muted'}}">{{item.state_name}}</span></td>
+                                <td>
+                                    <a href="javascript:void(0)" ng-show="item.state_id==1" ng-click="UpdateEp_advert_state(item.advert_id,0)">停止互推</a>
+                                    <a href="javascript:void(0)" ng-show="item.state_id==1" ng-click="To_Epadvert_detail(item.advert_id)">查看</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="panel">
+                <header class="panel-heading ng-binding" ng-show="ep.relation_list.length>0"><span class="pull-left">设置互推企业</span><a class="pull-right" href="javascript:void(0)" ng-click="open()">添加</a></header>
+                <div class="convie_nocomp" ng-hide="ep.relation_list.length>0">
+                    <!--还没有互推企业的时候  -->
+
+                    <p class="text-center">该企业账号未设置互推企业</p>
+                    <a href="javascript:void(0)" data-toggle="modal" class="btn btn_confirm" ng-click="open()">添加企业</a>
+                </div>
+                <!-- 有互推的企业 -->
+                <div class="convie_comp" ng-show="ep.relation_list.length>0">
+                    <div class="panel-body">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                            <tbody>
+                                <tr>
+                                    <th>公司名称</th>
+                                    <th>行业</th>
+                                    <th>地区</th>
+                                    <th>联系人</th>
+                                    <th>企业账号数量</th>
+                                </tr>
+                                <tr ng-repeat="item in ep.relation_list">
+                                    <td>{{item.comapny}}</td>
+                                    <td>{{item.category_name}}</td>
+                                    <td>{{item.province_name}}&nbsp;{{item.city_name}}</td>
+                                    <td>{{item.agency_name}}</td>
+                                    <td>{{item.member_count}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="zhezhao" ng-show="isOpen">
+    <div class="cdmxtc_mdiv Mask  modal-dialog">
+        <div class="styleCurrentLocal"><b>添加互推企业</b></div>
+        <div class="modal-body">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="inputEmail1">企业名称：</label>
+                    <input type="text" style="border-radius:0px;" class="form-control" id="inputEmail1" placeholder="输入企业名称" ng-model="to_company_name" ng-change="to_company_change()" autocomplete="off">
+                    <ul class="SearchHistory">
+                        <li ng-repeat="item in agency_list track by $index" ng-click="choice_agency($index)">{{item.company_name}}</li>
+                    </ul>
+                    <!--<p class="help-block text-dange">请输入你要添加的企业名称</p>-->
+                </div>
+            </div>
+        </div>
+
+        <div class="styleButton">
+            <input type="button" value="保存" class="btn_confirm" ng-click="UpdateEp_relation()">
+            <input type="button" value="取消" class="btn_cancel" ng-click="close()">
+        </div>
+    </div>
+</div>

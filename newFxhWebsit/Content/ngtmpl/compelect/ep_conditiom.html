@@ -1,0 +1,199 @@
+﻿<div class="wrapper">
+    <script type="text/javascript">
+        $(function () {
+            $(".changecategory button").click(function () {
+                if ($(this).hasClass("btn-info")) {
+                    $(this).removeClass("btn-info");
+                }
+                else {
+                    $(this).removeClass("btn-info");
+                    $(this).addClass("btn-info");
+                }
+            })
+            $("#showcomanyul").click(function () {
+                if ($("#comanyul").css("display") == "none") {
+                    $("#comanyul").show();
+                } else {
+                    $("#comanyul").hide();
+                }
+            });
+            //function changkeyword() {
+            //    console.log("oh,no");
+            //}
+            $("#keyword").on('input', function (e) {
+
+            });
+        })
+
+    </script>
+    <ul class="breadcrumb panel">
+        <li><a onclick="javascript:history.back(-1);"><i class="fa fa-home"></i>返回</a></li>
+        <li><a>互推设置</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="panel">
+                <header class="panel-heading">互推设置 </header>
+
+                <div class="panel-body">
+                    <div class="alert-danger alert">请勿频繁重新设置互推匹配条件，并且重新设置的互推将会在1-60分钟内才会生效。</div>
+                    <div class="alert-info alert" style="margin:4px">
+                        <span style="line-height:34px;">根据您的企业行业性质，推荐如下行业：</span><br />
+                        <button style="margin:4px" ng-repeat="item in math_ep_categorys track by $index" ng-class="JudgeJson(4,item.c_id)?'btn btn-default btn-info':'btn btn-default'" type="button" ng-click="pushOrDeleteFirstCategoryJson(item,!JudgeJson(4,item.c_id))">{{item.c_name}}</button>
+                    </div>
+
+                    <form class="form-horizontal extra-pad" role="form" style="padding-top:0px;">
+                        <div class="form-group">
+                            <label style="width: 100%;">
+                                互推公司<code>精准匹配</code><code>仅显示该企业所在地区企业</code>
+                                <div class="tiptool">
+                                    <div class="fa fa-exclamation-circle"></div>
+                                    <div class="tooltip right">
+                                        <div class="tooltip-arrow"></div>
+                                        <div class="tooltip-inner">
+                                            【互推公司】<br />您可以通过企业所在的地理位置，选择当地已开通互推功能的企业进行精准匹配。若您选择的地区没有可选企业，说明该地区暂无已开通此功能的企业供选择。
+                                            <br />
+                                            <!--<span style="color:red">选择完公司后请点击“添加至目标企业中”，可填加多个公司。</span>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                            <div>
+                                <div ng-show="ep_relation.length>0" class="imgclose choicecity">
+                                    <span style="line-height:34px;">您已经选择的目标企业：</span>
+                                    <ul class="ep_regionLi">
+                                        <li ng-repeat="i in ep_relation track by $index" class="btn  btn-info">
+                                            {{i.ep_agency_name}}<i ng-click="deleteJson(3,i.ep_agency_id)"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="select_two">
+                                    
+                                    <div style="margin-left:10px">
+                                        <span style="line-height:34px;">这里是本地所有的企业：</span><br />
+                                        <div style="width: 290px;height:64px;position:relative;float:left; margin-right:24px;">
+
+                                            <input id="keyword" class="form-control pull-left" style="margin-right:15px;position:absolute;z-index:2;left:0;top:0;height: 34px;width: 100%;" placeholder="输入企业关键字" autocomplete="off" ng-change="changkeyword()" ng-model="keyword" type="text" />
+
+                                            <span id="showcomanyul" style=" position: absolute;width: 34px;height: 32px; background: #fff;z-index: 3;right: 1px;top: 1px; text-align: center; border-radius: 0 3px 3px 0;background:#f3f3f3;"><i class="fa fa-sort-asc" style="line-height:27px;margin-right:0;"></i></span>
+
+                                            <style>
+                                                #comanyul li:hover {
+                                                    background: #e2e2e2;
+                                                }
+                                            </style>
+                                            <ul id="comanyul" class="form-control" style="position:absolute;z-index: 1;right: 0;margin-right: 0;width: 100%;top: 33px;background:#fff;max-height:260px;overflow:auto;height:auto;padding:6px; display:none;">
+                                                <li ng-repeat="(key,value) in ep_relations" id="{{key}}" style="padding:4px 0;cursor:pointer;" ng-click="PushSelect(value)">{{value}}</li>
+                                            </ul>
+                                        </div>
+                                        <!--<a href="javascript:void(0)" ng-click="PushSelect()" style="display:block;float: left;line-height: 34px;"><i class="fa fa-plus"></i>添加至目标企业中</a>-->
+                                        <!--下拉列表-->
+                                        <!--<select class="form-control  pull-left" ng-model="ep_agency_id">
+            <option value="-1">请选择互推企业</option>
+            <option ng-repeat="(key,value) in ep_relations" ng-selected="{{key==ep_agency_id}}" ng-model="key" value="{{key}}">{{value}}</option>
+        </select>
+        <a href="javascript:void(0)" ng-click="pushRelationJson()"><i class="fa fa-plus"></i>添加至目标企业中</a>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-show="(CityCompanys<10)" class="changecategory">
+                                
+                             </div>
+                            <!--<p class="help-block"></p>-->
+
+                        </div>
+
+                        <div class="form-group">
+                            <label style="width: 100%;">
+                                互推地区<code>模糊匹配</code><code>(不选择任何地区代表“全国/不限地区”)</code>
+                                <div class="tiptool">
+                                    <div class="fa fa-exclamation-circle"></div>
+                                    <div class="tooltip right">
+                                        <div class="tooltip-arrow"></div>
+                                        <div class="tooltip-inner">
+                                            【地区】<br />您可以通过企业所在的地理位置，进行模糊匹配。
+                                            <br />
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                            <div ng-show="ep_region.length>0" class="imgclose choicecity ">
+                                <span style="line-height:34px;">您已经选择的目标地区：</span>
+                                <ul class="ep_regionLi">
+                                    <li class="btn  btn-info" ng-repeat="i in ep_region track by $index">
+                                        {{i.province_name}}&nbsp;{{i.city_name}}<i ng-click="deleteJson(1,$index)"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="select_two">
+                                <select class="form-control pull-left" ng-model="provinceAreaId" ng-change="getCityArea()">
+                                    <option ng-repeat="(key,value) in provinceAreas" ng-selected="{{key==provinceAreaId}}" ng-model="key" value="{{key}}">{{value}}</option>
+                                </select>
+                                <select class="form-control pull-left" ng-model="cityAreaId">
+                                    <option value="-1">请选择城市</option>
+                                    <option ng-repeat="(key,value) in cityAreas" ng-selected="{{key==cityAreaId}}" ng-model="key" value="{{key}}">{{value}}</option>
+                                </select>
+                                <a href="javascript:void(0)" ng-click="pushRegionJson()"><i class="fa fa-plus"></i>添加至目标地区中</a>
+                            </div>
+
+                            <p class="help-block"></p>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label style="width: 100%;">
+                                互推行业<code>模糊匹配</code><code>(不选择任何行业代表“所有/不限行业”)</code>
+                                <div class="tiptool">
+                                    <div class="fa fa-exclamation-circle"></div>
+                                    <div class="tooltip right">
+                                        <div class="tooltip-arrow"></div>
+                                        <div class="tooltip-inner">
+                                            【行业】<br />您可以通过企业所属行业，进行模糊匹配。
+                                            <br />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                            <div class="ms-container" id="ms-my_multi_select1">
+                                <div class="select_two">
+                                    <select ng-model="ep_category_id" class="form-control" ng-change="GetEp_category()">
+                                        <option value="-1">所有行业</option>
+                                        <option ng-repeat="(key, value) in ep_categorys" ng-selected="{{key==ep_category_id}}" ng-model="key" value="{{key}}">{{value}}</option>
+                                    </select>
+                                    <div class="changecategory">
+                                        <button ng-show="(ep_category_id == item.parent_id)||ep_category_id=='-1'" ng-repeat="item in EpCategoryLeverTwo track by $index" ng-class="JudgeJson(2,item.c_id)?'btn btn-default btn-info':'btn btn-default'" type="button" ng-click="pushOrDeleteCategoryJson(item,!JudgeJson(2,item.c_id))">
+                                            {{item.c_name}}
+                                        </button>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-10">
+                                            <button type="submit" class="btn btn-success" ng-click="pushSelectAll()">所有行业</button>
+                                            <button type="submit" class="btn btn-success" ng-click="pushAntiElection()">反选</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class="help-block"></p>
+
+                            </div>
+                        </div>
+                        <!--<div ng-show="ep_category.length>0" class="imgclose form-group">
+                            <ul class="ep_regionLi">
+                                <li ng-repeat="i in ep_category track by $index">
+                                    {{i.large_c_name}}<i ng-click="deleteJson(2,$index)"></i>
+                                </li>
+                            </ul>
+                        </div>-->
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn_confirm" ng-click="UpdateEp_condition()">开始互推</button>
+                                <button type="submit" class="btn btn-default" ng-click="reload()">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

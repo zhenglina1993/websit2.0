@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<title>添加案例</title>
+	 <!-- 本地样式 -->
+    <link type="text/css" rel="stylesheet" href="/Content/css/style.css" />
+    <link type="text/css" rel="stylesheet" href="/Content/css/adv.css" />
+    <link type="text/css" rel="stylesheet" href="/Content/css/date.css" />
+    <!-- 迭代样式 -->
+    <link rel="stylesheet" type="text/css" href="/Content/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/css/bootstrap-reset.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/css/modeTwostyle.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/css/mode2Css.css" />
+</head>
+<body>
+    <div class="wrapper ">
+        <div class="row">
+            <div class="col-lg-5 col_100">
+                <div class="panel">
+                    <header class="panel-heading">
+                        添加案例
+                    </header>
+                    <div class="panel-body">
+                        <div class="styleFillList">
+                            <dl class="fill_single">
+                                <dt>公司名称<span class="requiredstyle">*</span>：</dt>
+                                <dd>
+                                    <input type="text">
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="styleFillList">
+                            <dl class="fill_single">
+                                <dt>合作时间<span class="requiredstyle">*</span>：</dt>
+                                <dd>
+                                    <input type="text" class="form_datetime form-control ng-pristine ng-valid ng-touched" readonly="readonly" name="reservation" id="reservation" placeholder="选择日期" date-tool="" ng-model="DateRange">
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="styleFillList">
+                            <dl class="fill_single">
+                                <dt>企业介绍<span class="requiredstyle">*</span>：</dt>
+                                <dd>
+                                    <textarea rows="6" class="form-control"></textarea>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="styleFillList">
+                            <dl class="fill_single">
+                                <dt>企业标识logo<span class="requiredstyle">*</span>：</dt>
+                                <dd>
+                                    <input type="file" class="default">
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="styleFillList">
+                            <dl class="fill_single">
+                                <dt>合作照片<span class="requiredstyle">*</span>：</dt>
+                                <dd>
+                                    <input type="file" class="default">
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="styleButton">
+                            <input type="button" value="保存" class="btn_confirm">
+                            <input type="button" value="取消" class="btn_cancel">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

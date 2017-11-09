@@ -1,0 +1,303 @@
+﻿<div class="wrapper">
+
+    <div class="panel">
+
+        <div class="panel-heading">
+            <form>
+                <ul style="margin-right:12px;" class=" pull-left">
+                    <li><a class="btn btn-danger" href="/Add/AddHouse.aspx">添加房源</a></li>
+                </ul>
+
+                <!--<ul ng-if="levelId==-1" style="margin-right:12px;" class=" pull-left">
+                    <li><a class="btn btn-info" target="_blank" href="{{ExportHref}}">导出Execl</a></li>
+                </ul>
+                <ul ng-show="levelId==0" style="margin-right:12px;" class=" pull-left">
+                    <li><a class="btn btn-success" ng-click="isOpenImport()">批量导入企业版用户</a></li>
+                </ul>
+                <ul ng-show="levelId==0" style="margin-right:12px;" class=" pull-left">
+                    <li><a class="btn btn-success" ng-click="openAddUsers()">添加企业版用户</a></li>
+                </ul>-->
+
+                <!--<div class="btn-group pull-left" style="margin-right:12px;" ng-show="levelId!=-1">
+                    <select ng-model="areaType" ng-change="search()" class="form-control">
+                        <option value="-1">所有</option>
+                        <option value="0">全国</option>
+                        <option value="1">区域</option>
+                    </select>
+                </div>-->
+                <div class="btn-group pull-left" style="margin-right:12px;">
+                    <select ng-model="type" ng-change="search()" class="form-control">
+                        <option value="0">房屋类型</option>
+                        <option value="1">整租</option>
+                        <option value="2">合租</option>
+                        <option value="3">二手房</option>
+                    </select>
+                </div>
+                <div class="btn-group pull-left" style="margin-right:12px;">
+                    <select ng-model="TprovinceAreaId" ng-change="getTCityArea()" class="form-control">
+                        <option value="-1">所有</option>
+                        <option ng-repeat="item in provinceAreas" ng-model="item.area_id" value="{{item.area_id}}">{{item.area_name}}</option>
+                    </select>
+                </div>
+                
+                <div class="btn-group pull-left" style="margin-right:12px;" ng-show="TprovinceAreaId!=-1 && TprovinceAreaId!=0">
+                    <select ng-model="TcityAreaId" class="form-control" ng-change="getTArea()">
+                        <option value="-1">请选择城市</option>
+                        <option ng-repeat="item in cityAreas" ng-model="item.area_id" value="{{item.area_id}}">{{item.area_name}}</option>
+                    </select>
+                </div>
+                <div class="btn-group pull-left" style="margin-right:12px;" ng-show="TcityAreaId!= -1 && TcityAreaId!=0">
+                    <select ng-model="TAreaId" class="form-control" ng-change="search()">
+                        <option value="-1">请选择区域</option>
+                        <option ng-repeat="item in Areas" ng-model="item.area_id" value="{{item.area_id}}">{{item.area_name}}</option>
+                    </select>
+                </div>
+
+                <div class="form-inline pull-left" style="margin-right:12px;">
+                    <input type="text" class="form_datetime form-control" readonly="readonly" name="reservation" id="reservation" placeholder="选择发布日期" date-tool ng-model="DateRange">
+                </div>
+
+                <div class="btn-group pull-left" style="margin-right:12px;">
+                    <select ng-model="paytype" ng-change="search()" class="form-control">
+                        <option value="">付款方式</option>
+                        <option value="1">押一付一</option>
+                        <option value="2">押一付三</option>
+                        <option value="3">半年付</option>
+                        <option value="4">整年付</option>
+                    </select>
+                </div>
+                <!--<div class="form-inline pull-left" style="margin-right:12px;">
+                    <input id="searchValue" placeholder="代理商手机号码" type="text" autocomplete="off" ng-model="agencyMobile" class="form-control" />
+                </div>
+                <div class="form-inline pull-left" style="margin-right:12px;">
+                    <input id="searchValue" placeholder="用户手机号码" autocomplete="off" type="text" ng-model="memberMobile" class="form-control" />
+                </div>
+                <div class="form-inline pull-left" style="margin-right:12px;">
+                    <input id="searchValue" placeholder="激活码" autocomplete="off" type="text" ng-model="activecode" class="form-control" />
+                </div>
+                <div class="form-inline pull-left" style="margin-right:12px;">
+                    <input id="searchValue" placeholder="代理商公司名称" autocomplete="off" type="text" ng-model="company" class="form-control" />
+                </div>-->
+                <div class="form-inline pull-left" style="margin-right: 12px;">
+                    <label>价格（元/月）</label>
+                    <input style="width: 15px" placeholder="最低价" autocomplete="off" type="text" ng-change="search()" ng-model="minprice" class="form-control" />
+                    <input style="width: 15px" placeholder="最高价" autocomplete="off" type="text" ng-change="search()" ng-model="maxproce" class="form-control" />
+                </div>
+                <div class="form-inline pull-left" style="margin-right:12px;">
+                    <label>面积（㎡）</label>
+                    <input style="width: 10px" placeholder="最低" autocomplete="off" type="text" ng-change="search()" ng-model="minmj" class="form-control" />
+                    <input style="width: 10px" placeholder="最高" autocomplete="off" type="text" ng-change="search()" ng-model="maxmj" class="form-control" />
+                </div>
+                <div class="form-inline pull-left" style="margin-right:12px;">
+                    <input id="searchValue" placeholder="关键字搜索" autocomplete="off" type="text" ng-change="search()" ng-model="keyword" class="form-control" />
+                </div>
+                <div class="form-inline pull-left" style="margin-right:12px;">
+                    <input id="searchBtn" type="submit" value="搜索" ng-click="search()" class="btn btn-info" />
+                </div>
+
+            </form>
+        </div>
+        <div class="panel-body">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                <tr>
+                    <th ng-show="levelId==-1">ID</th>
+                    <th>标题</th>
+                    <th>省市区（县）</th>
+                    <th>展示图</th>
+                    <th>户型</th>
+                    <th>朝向</th>
+                    <th>面积(m²）</th>
+                    <th>楼层/总楼层</th>
+                    <th>房屋配置</th>
+                    <th>房源优势</th>
+                    <th>价格</th>
+                    <th>支付方式</th>
+                    <th>状态</th>
+                    <th>浏览量</th>
+
+                    <th>发布时间</th>
+
+                    <th class="clear_bg">
+                        操作
+                        <div class="tiptool">
+                            <div class="fa fa-exclamation-circle"></div>
+                            <div class="tooltip left">
+                                <div class="tooltip-arrow"></div>
+                                <div class="tooltip-inner">
+                                    【作废】此操作将导致该激活码无法使用，若已使用，则使用此激活码激活的用户将会变回体验版用户。此操作不可逆，请谨慎操作。<br />
+                                    <div ng-show="levelId==0">
+                                        【添加备注】备注信息，例如此激活码已下发给XXX
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+                <tr ng-repeat="item in list">
+                    <!--<td>{{item.house_id}}</td>-->
+                    <td>{{item.name}}</td>
+                    <td>{{item.province_name}}{{item.city_name}}{{item.area_name}}</td>
+                    <td><img src="{{item.img}}" /></td>
+                    <td>{{item.hx}}</td>
+                    <td>{{item.fwcx}}</td>
+                    <td>{{item.fwmj}}</td>
+                    <td>{{item.lc}}/{{item.zlc}}</td>
+                    <td>{{item.fypz}}</td>
+                    <td>{{item.fyys}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.pay_type}}</td>
+
+                    <td ng-show="item.statu=='2'">置顶</td>
+                    <td ng-show="item.statu=='1'">上线中</td>
+                    <td ng-show="item.statu!=1 && item.statu!=2">默认</td>
+                    <td>{{item.look_num}}</td>
+                    <td>{{item.create_dt}}</td>
+                    <td class="td_handle">
+                        <a class="label label-info" href="javascript:void(0)" ng-click="Tovoid(item.activeCodeId)">查看详情</a>
+                        <a class="label label-success" href="javascript:void(0)" ng-click="ToStatu(item.house_id,2)">置顶</a>
+                        <a class="label label-danger" href="javascript:void(0)" ng-click="ToStatu(item.house_id,-1)">删除</a>
+                        <!--<a href="javascript:void(0)" ng-show="levelId==0 && {{item.status==0}}" ng-click="isOpenEnterpriseUser(item)">添加绑定账户</a>-->
+                        <!--<a href="javascript:void(0)" ng-show="levelId==0 && {{item.status==1}}" ng-click="isOpenEnterpriseUser(item)">换绑账户</a>-->
+                        <!--<a href="javascript:void(0)" ng-show="levelId==0 && {{item.status==1}}" ng-click="Unbundling(item.activeCodeId)">解绑</a>-->
+                        <a class="label label-success" href="javascript:void(0)" ng-show="levelId==0 && {{item.status==1}}" ng-click="isOpenAddRemark(item.memberId)">添加备注</a>
+                    </td>
+                </tr>
+            </table>
+            <div class="CountTotal">
+                <style>
+                    /*跳转*/
+                    input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                    }
+
+                    input[type="number"] {
+                        -moz-appearance: textfield;
+                    }
+                    .fill_single dt {
+                        line-height: 32px;
+                    }
+                </style>
+                <div class="dataTables_paginate paging_bootstrap pagination">
+                    <ul>
+                        <li><input type="number" name="name" ng-model="pindex" style="width:40px;margin: 0 3px;" /><a ng-click="pager.go(pindex)">前往</a></li>
+                        <li><a href="javascript:void(0)" ng-click="pager.pre()">← 上一页</a></li>
+                        <li ng-repeat="item in pager.list">
+                            <a href="javascript:void(0)" ng-if="item.text =='.'">{{item.text}}</a>
+                            <a href="javascript:void(0)" ng-if="item.text != '.'&& !item.disabled " class="c_page" style="color:#6591ce">{{item.text}}</a>
+                            <a href="javascript:void(0)" ng-if="item.text != '.'&& item.disabled" ng-click="pager.go(item.index)">{{item.text}}</a>
+                        </li>
+                        <li><a href="javascript:void(0)" ng-click="pager.next()">下一页 → </a></li>
+                    </ul>
+                </div>
+                <span>共<b>{{count}}</b>条记录</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="zhezhao" ng-show="isadd">
+    <div class="cdmxtc_mdiv Mask  modal-dialog">
+        <div class="styleCurrentLocal"><b>房源</b><button type="button" class="close" ng-click="close()">&times;</button></div>
+        <div class="styleFillList">
+            
+            <dl class="fill_single"><dt>标题<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="add_name" style="width:300px" /></dd></dl>
+            <dl class="fill_single">
+                <dt>类型<span class="requiredstyle">*</span>：</dt>
+                <dd>
+                    <select ng-model="addtype" class="drop-menu">
+                        <option value="0">房屋类型</option>
+                        <option value="1">整租</option>
+                        <option value="2">合租</option>
+                        <option value="3">二手房</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl class="fill_single">
+                <dt>省<span class="requiredstyle">*</span>：</dt>
+                <dd>
+                    <select ng-model="TprovinceAreaId" ng-change="getTCityArea()" class="drop-menu">
+                        <option value="-1">请选择</option>
+                        <option ng-repeat="item in provinceAreas" ng-model="item.area_id" value="{{item.area_id}}">{{item.area_name}}</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl ng-show="TprovinceAreaId!= -1 && TprovinceAreaId!=0" class="fill_single">
+                <dt>市<span class="requiredstyle">*</span>：</dt>
+                <dd>
+                    <select ng-model="TcityAreaId" class="drop-menu" ng-change="getTArea()">
+                        <option value="-1">请选择城市</option>
+                        <option ng-repeat="item in cityAreas" ng-model="item.area_id" value="{{item.area_id}}">{{item.area_name}}</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl ng-show="TcityAreaId!= -1 && TcityAreaId!=0" class="fill_single">
+                <dt>区<span class="requiredstyle">*</span>：</dt>
+                <dd>
+                    <select ng-model="TAreaId" class="drop-menu">
+                        <option value="-1">请选择区域</option>
+                        <option ng-repeat="item in Areas" ng-model="item.area_id" value="{{item.area_id}}">{{item.area_name}}</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl class="fill_single"><dt>联系人<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="AgencyName" style="width:300px" /></dd></dl>
+            <dl class="fill_single"><dt>联系方式<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-readonly="AgencyId>0" ng-model="MobilePhone" style="width:300px" /></dd></dl>
+            <dl class="fill_single"><dt>价格(<span ng-show="addtype == 3">万</span>元)<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="price" style="width:300px" /></dd></dl>
+            <dl ng-show="addtype != 3" class="fill_single">
+                <dt>付款方式<span class="requiredstyle">*</span>：</dt>
+                <dd>
+                    <select class="drop-menu">
+                        <option value="0">默认</option>
+                        <option value="1">押一付一</option>
+                        <option value="2">押一付三</option>
+                        <option value="3">半年付</option>
+                        <option value="4">整年付</option>
+                    </select>
+                </dd>
+            </dl>
+            
+            <dl class="fill_single"><dt>户型：</dt><dd><input type="text" ng-model="hx" style="width:300px" placeholder="三室一厅" /></dd></dl>
+            <dl class="fill_single"><dt>装修程度：</dt><dd><input type="text" ng-model="zxcd" style="width:300px" placeholder="简单装修、豪华装修" /></dd></dl>
+            <dl class="fill_single"><dt>面积：</dt><dd><input type="text" ng-model="hx" style="width:300px" placeholder="" /></dd></dl>
+            <dl class="fill_single"><dt>房屋朝向：</dt><dd>
+                <select class="drop-menu">
+                    <option value="">默认</option>
+                    <option value="东">东</option>
+                    <option value="南">南</option>
+                    <option value="西">西</option>
+                    <option value="北">北</option>
+                    <option value="东南">东南</option>
+                    <option value="东北">东北</option>
+                    <option value="西南">西南</option>
+                    <option value="西北">西北</option>
+                    <option value="东西">东西</option>
+                    <option value="南北">南北</option>
+                </select>
+            </dd></dl>
+
+            <dl class="fill_single"><dt>房屋楼层：</dt><dd><input type="number" min="0" ng-model="lc" placeholder="所在楼层" style="width:300px" /></dd></dl>
+            <dl class="fill_single"><dt>总楼层：</dt><dd><input type="number" min="1" ng-model="zlc" placeholder="总楼层" style="width:300px" /></dd></dl>
+            
+            <dl class="fill_single"><dt>房源配置：</dt><dd><input type="text" ng-model="fypz" style="width:300px" placeholder="如：床、暖气、衣柜、热水器、洗衣机" /></dd></dl>
+            <dl class="fill_single"><dt>房源优势：</dt><dd><input type="text" ng-model="fyys" style="width:300px" placeholder="如：首次出租、随时看房、紧邻地铁" /></dd></dl>
+            
+            
+            <div>
+                <dl class="fill_single">
+                    <dt>封面图<span class="requiredstyle" ng-show="levelId!=-1">*</span>：</dt>
+                    <dd>
+                        <input ng-hide="card_p!=undefined && card_p!=''" accept="image/*" type="file" ngf-select ng-model="filecard_p" ngf-max-size="10MB" required
+                               ngf-model-invalid="errorFile" ngf-change="UploadPic('imgs')" style="width: 300px" />
+                    </dd>
+                </dl>
+            </div>
+            <div id="imgs" class="imgclose">
+                          
+            </div>
+            <div class="styleButton">
+                <input type="button" value="{{levelId==-1?'保存':'提交审核'}}" ng-disabled="disabled" class="btn btn_confirm" ng-click="UploadPic()">
+                <input type="button" value="取消" class="btn btn_cancel" ng-click="close()">
+            </div>
+        </div>
+    </div>
+</div>-->

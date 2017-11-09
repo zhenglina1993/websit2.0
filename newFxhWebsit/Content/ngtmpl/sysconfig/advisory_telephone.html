@@ -1,0 +1,141 @@
+﻿<div class="wrapper">
+    <ul class="breadcrumb panel">
+        <li><a><i class="fa fa-home"></i>咨询电话</a></li>
+    </ul>
+    <div class="row">
+        <form class="form-horizontal" role="form">
+            <div class="col-lg-4">
+                <section class="panel" ng-hide="isEdit">
+                    <header class="panel-heading">
+                        咨询电话
+                    </header>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="inputEmail1" class=" col-lg-4 col-sm-4 control-label">电话号码：</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" id="inputEmail1" value="{{telephone}}" disabled>
+                                <a ng-click="edit('tel')" class="help-block">修改</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div ng-show="levelId==1">
+                    <section class="panel" ng-show="isEdit">
+                        <header class="panel-heading">
+                            修改咨询电话
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">电话号码<span class="requiredstyle">*</span>：</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="inputEmail1" ng-model="newtelephone" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-danger" ng-click="submit('tel')">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="panel" ng-hide="isqdEdit">
+                        <header class="panel-heading">
+                            渠道电话
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="inputEmail1" class=" col-lg-4 col-sm-4 control-label">电话号码：</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="inputEmail1" value="{{qudao_tel}}" disabled>
+                                    <a ng-click="edit('qudao')" class="help-block">修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="panel" ng-show="isqdEdit">
+                        <header class="panel-heading">
+                            修改渠道电话
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">电话号码<span class="requiredstyle">*</span>：</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="inputEmail1" ng-model="newqudao_tel" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-danger" ng-click="submit('qudao')">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="panel" ng-hide="isbuyEdit">
+                        <header class="panel-heading">
+                            购买电话
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="inputEmail1" class=" col-lg-4 col-sm-4 control-label">电话号码：</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="inputEmail1" value="{{buy_tel}}" disabled>
+                                    <a ng-click="edit('buy')" class="help-block">修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="panel" ng-show="isbuyEdit">
+                        <header class="panel-heading">
+                            修改购买电话
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">电话号码<span class="requiredstyle">*</span>：</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="inputEmail1" ng-model="newbuy_tel" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-danger" ng-click="submit('buy')">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="panel" ng-hide="isadEdit">
+                        <header class="panel-heading">
+                            广告投放电话
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="inputEmail1" class=" col-lg-4 col-sm-4 control-label">电话号码：</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="inputEmail1" value="{{ad_tel}}" disabled>
+                                    <a ng-click="edit('ad')" class="help-block">修改</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="panel" ng-show="isadEdit">
+                        <header class="panel-heading">
+                            修改广告投放电话
+                        </header>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">电话号码<span class="requiredstyle">*</span>：</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="inputEmail1" ng-model="newad_tel" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" class="btn btn-danger" ng-click="submit('ad')">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

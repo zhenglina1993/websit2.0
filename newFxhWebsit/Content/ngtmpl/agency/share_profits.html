@@ -1,0 +1,334 @@
+﻿<div class="wrapper">
+    <ul class="breadcrumb panel">
+        <li><a><i class="fa fa-home"></i>合作商管理</a></li>
+    </ul>
+    <div class="panel">
+        <div class="panel-heading">
+            <form>
+                <ul class="btn-group pull-left" style="margin-right:12px;">
+                    <li><a class="btn btn-success" ng-click="open()">新增分润商 <i class="fa fa-plus"></i></a></li>
+                </ul>
+                <!--<ul ng-show="levelId==2">
+                    <li><a class="icon op-add" ng-click="open()">新增企业版</a></li>
+                </ul>-->
+                <!-- 日期选择：<input type="text" class="input_l date_picker " /> -->
+                <!--<div date-tool="DateRange" ng-hide="1==1" class="styleFillList menuFillList fl">
+                    <input type="text" readonly="readonly" name="reservation" id="reservation" class="order_date" placeholder="选择日期" ng-model="DateRange" onclick="$('.date_picker').date_input();" />
+                </div>-->
+                <div class="btn-group pull-left" style="margin-right:12px;">
+                    <select ng-model="orderindex" ng-change="order()" class="form-control">
+                        <!--<option value="-1">默认排序</option>-->
+                        <!--<option value="0" ng-selected="{{orderindex==0||orderindex==null}}">默认排序</option>-->
+                        <option ng-repeat="item in orderlist" ng-selected="{{item['id']==orderindex}}" ng-model="item['id']" value="{{item['id']}}">{{item.name}}</option>
+                    </select>
+                </div>
+                <!--<div class="btn-group pull-left" style="margin-right:12px;">
+                    <select class="form-control" ng-model="agencyLevelId" ng-change="agencyLevelsearch()">
+                        <option value="-1">代理商类型</option>
+                        <option ng-repeat="(key,value) in TAgencyLevels" ng-selected="{{key==agencyLevelId}}" ng-model="key" value="{{key}}">{{value}}</option>
+                    </select>
+                </div>-->
+                <div class="btn-group pull-left" style="margin-right:12px;">
+                    <select class="form-control " ng-show="agencylevelid==2" ng-model="agencyTypeId" ng-change="search()">
+                        <option value="-1">请选择</option>
+                        <option ng-repeat="(key,value) in TAgencyTypes" ng-selected="{{key==agencyTypeId}}" ng-model="key" value="{{key}}">{{value}}</option>
+                    </select>
+                </div>
+                <div class="btn-group pull-left" style="margin-right:12px;">
+                    <select ng-show="levelId==-1" ng-model="TprovinceAreaId" ng-change="getTCityArea()" class="form-control">
+                        <!--<option value="-1">所有</option>-->
+                        <option value="0">所有</option>
+                        <option ng-repeat="(key, value) in provinceAreas" ng-selected="{{key==TprovinceAreaId}}" ng-model="key" value="{{key}}">{{value}}</option>
+                    </select>
+                </div>
+                <div class="btn-group pull-left" style="margin-right:12px;">
+                    <select ng-show="TprovinceAreaId!=-1 && TprovinceAreaId!=0" ng-model="TcityAreaId" class="form-control">
+                        <option value="-1">请选择城市</option>
+                        <option ng-repeat="(key, value) in cityAreas" ng-selected="{{key==TcityAreaId}}" ng-model="key" value="{{key}}">{{value}}</option>
+                    </select>
+                </div>
+                <div class="btn-group pull-left" style="margin-right:12px;">
+                    <select ng-model="EpCategoryIdOne" class="form-control" ng-change="GetEpCategoryIds(EpCategoryIdOne)">
+                        <option value="-1" ng-click="resetsearch()">行业一级分类</option>
+                        <option ng-repeat="(key, value) in EpCategoryLeverOneIds" ng-selected="{{key==EpCategoryIdOne}}" ng-model="key" value="{{key}}">{{value}}</option>
+                    </select>
+                </div>
+                <div class="btn-group pull-left" style="margin-right:12px;">
+                    <select ng-show="EpCategoryIdOne!=-1 && EpCategoryIdOne !=0" ng-model="EpCategoryIdTwo" class="form-control" ng-change="search()">
+                        <option value="-1" ng-click="resetsearch()">行业二级分类</option>
+                        <option ng-repeat="(key, value) in EpCategoryLeverTwoIds" ng-selected="{{key==EpCategoryIdTwo}}" ng-model="key" value="{{key}}">{{value}}</option>
+                    </select>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input id="searchValue" placeholder="代理商帐号/联系人/公司名称" type="text" ng-model="keyWord" autocomplete="off" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input id="searchValue" placeholder="上级代理商帐号/联系人/公司名称" type="text" ng-model="parent_keyword" autocomplete="off" class="form-control" />
+                    </div>
+                    <input id="searchBtn" type="submit" value="搜索" ng-click="search()" class="btn btn-info" />
+                </div>
+            </form>
+        </div>
+        <div class="panel-body">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                <tr>
+                    <!-- <th class="th_slt"><input type="checkbox" name="all" id="all"/></th> -->
+                    <th ng-show="levelId==-1">ID</th>
+                    <th>联系人</th>
+                    <th>公司名称</th>
+                    <th>手机号码</th>
+                    <th>上级代理</th>
+                    <th>城市</th>
+                    <th>行业</th>
+                    <th ng-hide="levelId==0">推广费</th>
+                    <th ng-show="levelId==-1">推广余额</th>
+                    <th>激活码数量</th>
+                    <th>类型</th>
+                    <th>分润比例</th>
+                    <th>备注</th>
+                    <th>付款</th>
+                    <th>开通时间</th>
+                    <th>保护期限</th>
+                    <!--<th>修改时间</th>-->
+                    <th class="clear_bg">操作</th>
+                </tr>
+                <tr ng-repeat="item in list">
+                    <!-- <td><input type="checkbox" /></td> -->
+                    <td ng-show="levelId==-1">{{item.agencyId}}</td>
+                    <td><a href="javascript:void(0)" ng-click="ToDetail(item.agencyId)">{{item.agencyName}}</a></td>
+                    <td>{{item.company}}</td>
+                    <td>{{item.mobile}}</td>
+                    <td>{{item.parentAgency}}</td>
+                    <td>{{item.city}}</td>
+                    <td>{{item.category_name}}</td>
+                    <td ng-hide="levelId==0">{{item.balance==null?0:item.balance}}</td>
+                    <td ng-show="levelId==-1">{{item.promotion_balance}}</td>
+                    <td><a href="/membertool/Index.aspx#/activecodelist/{{item.agencyId}}">{{item.activeAlreadyUsedCount}}/{{item.activeCount}}</a></td>
+                    <td>{{level(item.agencyLevelId)}}&nbsp;{{type(item.agencyTypeId)}}</td>
+                    <td>{{item.share_percent}}</td>
+                    <td style="max-width:200px;overflow-wrap:break-word">{{item.remark}}</td>
+                    <td>{{item.paid_amount}}/{{item.coo_amount}}</td>
+                    <td>{{item.createDate}}</td>
+                    <td>{{item.task_timelimit}}</td>
+                    <!--<td>{{item.modifyDate}}</td>-->
+                    <td class="td_handle">
+                        <!--<a href="javascript:void(0)" class="deleat">删除</a>-->
+                        <a class="label label-success" href="javascript:void(0)" ng-show="levelId==-1" ng-click="isOpenRecharge(item)">充值</a>
+                        <a class="label label-info" href="javascript:void(0)" ng-click="ToDetail(item.agencyId)">查看详情</a>
+                        <a class="label label-info" href="javascript:void(0)" ng-show="levelId==-1" ng-click="ToMemberarticlelist(item.agencyId)">推广文章</a>
+                        <a class="label label-warning" href="javascript:void(0)" ng-click="openEdit(item)">修改</a>
+                        <a class="label label-success" href="javascript:void(0)" ng-show="levelId!=-1" ng-click="openSplit(item)">添加激活码</a>
+                        <a class="label label-danger" href="javascript:void(0)" ng-show="levelId==-1" ng-click="resetPassword(item.agencyId)">重置密码</a>
+                        <a class="label label-success" href="javascript:void(0)" ng-click="isOpenAddRemark(item.agencyId)">添加备注</a>
+                        <!--<a href="javascript:void(0)" ng-show="IsAll==0" ng-click="ToAddAdvert(item.agencyId)">添加推广</a>-->
+                        <!--<a href="javascript:void(0)" ng-show="IsAll==0" ng-click="isOpenAddEnterpriseUser(item.agencyId)">添加绑定用户</a>-->
+                        <!--<a href="javascript:void(0)" ng-show="levelId==-1 && item.is_lock==0" ng-click="locking(item)">冻结</a>-->
+                        <!--<a href="javascript:void(0)" ng-show="levelid==-1 && item.is_lock==1" ng-click="unlock(item)">解冻</a>-->
+                        <a class="label label-danger" href="javascript:void(0)" ng-show="levelId==-1" ng-click="delAgency(item)">删除</a>
+                    </td>
+                </tr>
+            </table>
+            <div class="CountTotal">
+                <div class="dataTables_paginate paging_bootstrap pagination">
+                    <style>
+                        /*跳转*/
+                        input::-webkit-outer-spin-button,
+                        input::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                        }
+
+                        input[type="number"] {
+                            -moz-appearance: textfield;
+                        }
+                    </style>
+                    <ul>
+                        <li><input type="number" name="name" ng-model="pindex" style="width:40px;margin: 0 3px;" /><a ng-click="pager.go(pindex)">前往</a></li>
+                        <li><a href="javascript:void(0)" ng-click="pager.pre()">← 上一页</a></li>
+                        <li ng-repeat="item in pager.list">
+                            <a href="javascript:void(0)" ng-if="item.text =='.'">{{item.text}}</a>
+                            <a href="javascript:void(0)" ng-if="item.text != '.'&& !item.disabled " class="c_page" style="color:#6591ce">{{item.text}}</a>
+                            <a href="javascript:void(0)" ng-if="item.text != '.'&& item.disabled" ng-click="pager.go(item.index)">{{item.text}}</a>
+                        </li>
+                        <li><a href="javascript:void(0)" ng-click="pager.next()">下一页 → </a></li>
+                    </ul>
+                </div>
+                <span>共<b>{{count}}</b>条记录</span>
+                <!-- <span>页数：<b>2</b>/<b>102</b>页</span> -->
+            </div>
+        </div>
+        <div class="zhezhao" ng-show="isShow">
+            <div class="cdmxtc_mdiv Mask  modal-dialog">
+                <div class="styleCurrentLocal"><b>分润商</b><button type="button" class="close" ng-click="close()">&times;</button></div>
+                <div class="styleFillList">
+                    <dl class="fill_single">
+                        <dt>类型<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <select class="drop-menu" ng-options="a.Id as a.Name for a in AgencyLevels" ng-model="childAgency.ChildAgencyLevelId" ng-change="levelchage()"></select>
+                            <!--<select ng-show="childAgency.ChildAgencyLevelId == 2" class="drop-menu" ng-options="a.Id as a.Name for a in AgencyTypes" ng-model="childAgency.ChildAgencyTypeId"></select>-->
+                        </dd>
+                    </dl>
+                    <dl ng-show="levelId==-1" class="fill_single">
+                        <dt>地区<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <select ng-model="provinceAreaId" ng-change="getChildCityAreas()" class="drop-menu">
+                                <option value="-1">请选择省份</option>
+                                <option ng-repeat="(key, value) in provinceAreas" ng-selected="{{key==provinceAreaId}}" ng-model="key" value="{{key}}">{{value}}</option>
+                            </select>
+                            <select ng-show="provinceAreaId!=1 && provinceAreaId!=0" ng-model="cityAreaId" class="drop-menu">
+                                <option value="-1">请选择城市</option>
+                                <option ng-repeat="(key, value) in cityAreas" ng-selected="{{key==cityAreaId}}" ng-model="key" value="{{key}}">{{value}}</option>
+                            </select>
+                        </dd>
+                    </dl>
+                    <dl class="fill_single">
+                        <dt>行业<span class="requiredstyle">*</span>：</dt>
+                        <dd>
+                            <select ng-model="CategoryIdOne" class="drop-menu" ng-change="GetCategoryIds(CategoryIdOne)">
+                                <option value="-1">行业一级分类</option>
+                                <option ng-repeat="(key, value) in EpCategoryLeverOneIds" ng-selected="{{key==CategoryIdOne}}" ng-model="key" value="{{key}}">{{value}}</option>
+                            </select>
+                            <select ng-model="CategoryIdTwo" class="drop-menu">
+                                <option value=" -1">行业二级分类</option>
+                                <option ng-repeat="(key, value) in CategoryLeverTwoIds" ng-selected="{{key==CategoryIdTwo}}" ng-model="key" value="{{key}}">{{value}}</option>
+                            </select>
+                        </dd>
+                    </dl>
+                    <dl class="fill_single"><dt>公司名称<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="Company" style="width:300px" /></dd></dl>
+                    <dl class="fill_single"><dt>联系人<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="AgencyName" style="width:300px" /></dd></dl>
+                    <dl class="fill_single"><dt>联系方式&nbsp;<div class="tiptool"><div class="fa fa-exclamation-circle"></div> <div class="tooltip right"><div class="tooltip-arrow"></div><div class="tooltip-inner">登录帐号</div></div></div><span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-readonly="AgencyId>0" ng-model="MobilePhone" style="width:300px" /></dd></dl>
+                    <dl class="fill_single" ng-show="levelId==-1"><dt>推广折扣：</dt><dd><input type="number" step="0.1" max="1" min="0" ng-model="sale" style="width:300px" /></dd></dl>
+                    <dl class="fill_single" ng-show="levelId==-1"><dt>分润比例：</dt><dd><input type="text" ng-model="share_percent" style="width:300px" /></dd></dl>
+                    <dl class="fill_single" ng-show="levelId==-1"><dt>目标期限：</dt><dd>
+                        <input type="text" ng-model="year" style="width:100px;float:left" placeholder="年"/>
+                        <span style="float:left;margin-left:-20px;padding:9px 0;">年</span>
+                        <input type="text" ng-model="month" style="width:100px;float:left" placeholder="月" />
+                        <span style="float:left;margin-left:-20px;padding:9px 0;">月</span>
+                        <input type="text" ng-model="day" style="width:100px;float:left" placeholder="日" />
+                        <span style="float:left;margin-left:-20px;padding:9px 0;">日</span></dd></dl>
+                    <!--<dl class="fill_single"><dt>状态：</dt><dd><select class="drop-menu" ng-options="a.Id as a.Name for a in Statuss" ng-model="StatusId"></select></dd></dl>-->
+                    <dl class="fill_single" ng-show="levelId==-1"><dt>已付金额：</dt><dd><input type="number" ng-model="paid_amount" style="width:300px" /></dd></dl>
+                    <dl class="fill_single" ng-show="levelId==-1"><dt>合作金额：</dt><dd><input type="number" ng-model="coo_amount" style="width:300px" /></dd></dl>
+                    <dl class="fill_single"><dt>联系地址<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="Address" style="width:300px" /></dd></dl>
+                    <div ng-show="AgencyId==0">
+                        <!--身份证正面-->
+                        <dl class="fill_single">
+                            <dt>身份证正面<span class="requiredstyle" ng-show="levelId!=-1">*</span>：</dt>
+                            <dd>
+                                <input ng-hide="card_p!=undefined && card_p!=''" accept="image/*" type="file" ngf-select ng-model="filecard_p" ngf-max-size="10MB" required
+                                       ngf-model-invalid="errorFile" ngf-change="uploadImg(filecard_p,'card_p')" style="width: 300px" />
+                                <div class="imgclose">
+                                    <img ng-show="card_p!=undefined && card_p!=''" src="{{card_p}}" style="float:left;" class="count_20" /><i ng-show="card_p!=undefined && card_p!=''" ng-click="clearImg('card_p')"></i>
+                                </div>
+                            </dd>
+                        </dl>
+                        <!--身份证反面-->
+                        <dl class="fill_single">
+                            <dt>身份证反面<span class="requiredstyle" ng-show="levelId!=-1">*</span>：</dt>
+                            <dd>
+                                <input ng-hide="card_s!=undefined && card_s!=''" accept="image/*" type="file" ngf-select ng-model="filecard_s" ngf-max-size="10MB" required
+                                       ngf-model-invalid="errorFile" ngf-change="uploadImg(filecard_s,'card_s')" style="width: 300px" />
+                                <div class="imgclose">
+                                    <img ng-show="card_s!=undefined && card_s!=''" src="{{card_s}}" style="float:left;" class="count_20" /><i ng-show="card_s!=undefined && card_s!=''" ng-click="clearImg('card_s')"></i>
+                                </div>
+                            </dd>
+                        </dl>
+                        <!--营业执照-->
+                        <dl class="fill_single">
+                            <dt>营业执照<span class="requiredstyle" ng-show="levelId!=-1">*</span>：</dt>
+                            <dd>
+                                <input ng-hide="license!=undefined && license!=''" accept="image/*" type="file" ngf-select ng-model="filelicense" ngf-max-size="10MB" required
+                                       ngf-model-invalid="errorFile" ngf-change="uploadImg(filelicense,'license')" style="width: 300px" />
+                                <div class="imgclose">
+                                    <img ng-show="license!=undefined && license!=''" src="{{license}}" style="float:left;" class="count_20" /><i ng-show="license!=undefined && license!=''" ng-click="clearImg('license')"></i>
+                                </div>
+                            </dd>
+                        </dl>
+                        <!--其他-->
+                        <dl class="fill_single">
+                            <dt>其他：</dt>
+                            <dd>
+                                <input ng-hide="other!=undefined && other!=''" accept="image/*" type="file" ngf-select ng-model="fileother" ngf-max-size="10MB" required
+                                       ngf-model-invalid="errorFile" ngf-change="uploadImg(fileother,'other')" style="width: 300px" />
+                                <div class="imgclose">
+                                    <img ng-show="other!=undefined && other!=''" src="{{other}}" style="float:left;" class="count_20" /><i ng-show="other!=undefined && other!=''" ng-click="clearImg('other')"></i>
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl class="fill_single">
+                            <dt>
+                                通知邮箱&nbsp;
+                                <div class="tiptool">
+                                    <div class="fa fa-exclamation-circle"></div>
+                                    <div class="tooltip right">
+                                        <div class="tooltip-arrow"></div>
+                                        <div class="tooltip-inner">审核通过之后以邮箱的方式通知</div>
+                                    </div>
+                                </div>
+                                <span class="requiredstyle" ng-show="levelId!=-1">*</span>：
+                            </dt>
+                            <dd><input type="text" ng-model="email" style="width:300px" /></dd>
+                        </dl>
+                    </div>
+                    <dl ng-if="AgencyId==0 && !isOpenAddActiveCode" class="fill_single"><dt>&nbsp;</dt><dd><a href="javascript:void(0)" class="addcode" ng-click="openAddActiveCode()">添加激活码</a></dd></dl>
+                    <div ng-show="isOpenAddActiveCode">
+                        <!--<dl class="fill_single" ng-show="levelId==-1">
+                            <dt>激活码区域：</dt>
+                            <dd>
+                                <select ng-model="provinceAreaId" ng-change="getChildCityAreas()" class="drop-menu">
+                                    <option value="-1">请选择省份</option>
+                                    <option ng-repeat="(key, value) in provinceAreas" ng-model="key" value="{{key}}">{{value}}</option>
+                                </select>
+                                <select ng-show="provinceAreaId!=-1 && provinceAreaId!=0" ng-model="cityAreaId" class="drop-menu">
+                                    <option value="0">请选择城市</option>
+                                    <option ng-repeat="(key, value) in cityAreas" ng-model="key" value="{{key}}">{{value}}</option>
+                                </select>
+                            </dd>
+                        </dl>-->
+                        <dl class="fill_single"><dt>数量&nbsp;<div class="tiptool"><div class="fa fa-exclamation-circle"></div>/d di<div class="tooltip right"><div class="tooltip-arrow"></div><div class="tooltip-inner">激活码区域为代理商归属地区</div></div></div><span class="requiredstyle">*</span>：</dt><dd><input type="number" ng-model="Total" style="width:300px" /></dd></dl>
+                        <!--<dl class="fill_single ng-scope">
+                            <dt></dt>
+                            <dd><p class="text-danger">激活码区域为代理商归属地区</p></dd>
+                        </dl>-->
+                    </div>
+                    <dl ng-show="AgencyId==0" class="fill_single ng-scope">
+                        <dt>&nbsp;</dt>
+                        <dd><p class="text-danger">密码为手机号后6位</p></dd>
+                    </dl>
+
+                    <div class="styleButton">
+                        <input type="button" value="{{levelId==-1?'保存':'提交审核'}}" ng-disabled="disabled" class="btn btn_confirm" ng-click="saveAgency()">
+                        <input type="button" value="取消" class="btn btn_cancel" ng-click="close()">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="zhezhao" ng-show="isAddRemark">
+            <div class="cdmxtc_mdiv Mask modal-dialog">
+                <div class="styleCurrentLocal"><b>添加备注</b></div>
+                <div class="styleFillList">
+                    <dl class="fill_single"><dt>备注<span class="requiredstyle">*</span>：</dt><dd><input type="text" ng-model="Reamrk" /></dd></dl>
+                    <div class="styleButton">
+                        <input type="button" value="保存" class="btn btn_confirm" ng-click="addRemark()">
+                        <input type="button" value="取消" class="btn btn_cancel" ng-click="closeAddRemark()">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="zhezhao" ng-show="isRecharge">
+            <div class="cdmxtc_mdiv Mask modal-dialog">
+                <div class="styleCurrentLocal"><b>充值余额</b></div>
+                <div class="styleFillList">
+                    <dl class="fill_single"><dt>现存金额<span class="requiredstyle">*</span>：</dt><dd><label>{{NowRecharge}}</label></dd></dl>
+                    <dl class="fill_single"><dt>充值金额<span class="requiredstyle">*</span>：</dt><dd><input type="number" ng-model="addRecharge" /></dd></dl>
+                    <div class="styleButton">
+                        <input type="button" value="充值" class="btn btn_confirm" ng-click="ToAddRecharge()">
+                        <input type="button" value="取消" class="btn btn_cancel" ng-click="close()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

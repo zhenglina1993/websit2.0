@@ -1,0 +1,61 @@
+﻿<div class="wrapper">
+    <ul class="breadcrumb panel">
+        <li><a>功能设置</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading ng-binding">企业互推功能</header>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <strong class="pull-left">开启企业互推功能，能帮你快速推广产品。</strong>
+                        <a class="btn btn-info pull-right" ng-show="!d.ep_disabled" ng-click="UpdateAgency_ep(2,1)">关闭</a>
+                        <a class="btn btn-info pull-right" ng-show="d.ep_disabled" ng-click="UpdateAgency_ep(2,0)">开启</a>
+                    </div>
+                    <div class="col-md-12">
+                        <p class="text-success">当前{{d.ep_disabled?"禁用":"开启"}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <header class="panel-heading ng-binding">行业设置</header>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <strong class="pull-left">行业信息，能让你的广告互推更加精准。</strong>
+                        <a class="btn btn-info pull-right" ng-click="open()">编辑</a>
+                    </div>
+
+                    <div class="col-md-12">
+                        <p class="text-success">当前行业：{{d.ep_category_id==0?"暂未设置行业":d.ep_category_name}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 点击行业设置编辑页面 -->
+<div class="zhezhao" ng-show="isOpen">
+    <div class="cdmxtc_mdiv Mask  modal-dialog">
+        <div class="styleCurrentLocal"><b>欢迎使用分企业互推功能</b></div>
+        <div class="modal-body">
+            <div class="modal-body">
+                <p class="text-center" style="width: 80%;margin:16px auto;">企业互推能帮你快速推广品牌和产品。为了推广更精准，首次使用请先设置你公司的行业。</p>
+                <div class="col-sm-12 col-xs-12 ">
+                    <select class="form-control m-bot15" ng-model="ep_category_id">
+                        <option value="0">选择你公司的行业</option>
+                        <option ng-repeat="(key,value) in ep_categorys" value="{{key}}" ng-model="key">{{value}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="styleButton">
+            <input type="button" value="保存" class="btn_confirm" ng-click="UpdateAgency_ep(1,ep_category_id)">
+            <input type="button" value="取消" class="btn_cancel" ng-click="close()">
+        </div>
+    </div>
+</div>

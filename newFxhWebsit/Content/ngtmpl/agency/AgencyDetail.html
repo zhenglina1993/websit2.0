@@ -1,0 +1,194 @@
+﻿<div class="wrapper">
+
+    <ul class="breadcrumb panel">
+        <li><a onclick="javascript:history.back(-1);"><i class="fa fa-home"></i>返回</a></li>
+        <li><a>{{Data.company}}-合作商信息</a></li>
+    </ul>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-body extra-pad">
+                    <h4 class="pros-title"> 推广信息</h4>
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-4">
+                            <div>推广总消耗</div>
+                            <p class="p-chart-title"><h2>{{Data.advertAllMoney}}</h2> 元</p>
+                        </div>
+                        <div class="col-sm-4 col-xs-4">
+                            <div>账户余额</div>
+                            <p class="p-chart-title"><h2>{{Data.balance}}</h2> 元</p>
+                        </div>
+                        <div class="col-sm-4 col-xs-4">
+                            <div>今日消耗</div>
+                            <p class="p-chart-title"><h2>{{Data.advertDayMoney}}</h2> 元</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-body extra-pad">
+                    <h4 class="pros-title"> 激活码信息</h4>
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-4">
+                            <div>激活码数量</div>
+                            <p class="p-chart-title"><h2>{{Data.childAllActiveCount}}</h2> 个</p>
+                        </div>
+                        <div class="col-sm-4 col-xs-4">
+                            <div>激活码已用</div>
+                            <p class="p-chart-title"><h2>{{Data.childAlreadyused}}</h2> 个</p>
+                        </div>
+                        <div class="col-sm-4 col-xs-4">
+                            <div>激活码剩余</div>
+                            <p class="p-chart-title"><h2>{{Data.childNotused}}</h2> 个</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row" ng-show="Data.childAgencyLevelId==1">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">下级代理信息（代理商数量：{{agencylist.length}}）</header>
+                <div class="panel-body">
+
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                        <tr>
+                            <th>代理商名称</th>
+                            <th>激活码</th>
+                            <th>推广费用（元）</th>
+                        </tr>
+                        <tr ng-repeat="item in agencylist">
+                            <td>{{item.agencyName}}</td>
+                            <td>{{item.activeAlreadyUsedCount}}/{{item.activecount}}</td>
+                            <td>{{item.balance}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="Data.childAgencyLevelId==1 || Data.childAgencyLevelId==2">
+        <div class="col-md-12">
+            <div class="panel">
+                <header class="panel-heading">企业版（企业版数量：{{enterpriselist.length}}）</header>
+                <div class="panel-body ">
+
+                    <table width=100%" border="0" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed">
+                        <tr>
+                            <th>企业名称</th>
+                            <th>激活码</th>
+                            <th class="clear_bg">创建时间</th>
+                        </tr>
+                        <tr ng-repeat="item in enterpriselist">
+                            <td>{{item.agencyName}}</td>
+                            <td>{{item.activeAlreadyUsedCount}}/{{item.activecount}}</td>
+                            <td>{{item.createDate}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-body extra-pad">
+                    <h4 class="pros-title"> 用户信息</h4>
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-4">
+                            <div>总用户数</div>
+                            <p class="p-chart-title"><h2>{{Data.childAllMemberCount}}</h2> 人</p>
+                        </div>
+                        <div class="col-sm-4 col-xs-4">
+                            <div>激活用户</div>
+                            <p class="p-chart-title"><h2>{{Data.childActiveMemberCount}}</h2> 人</p>
+                        </div>
+                        <div class="col-sm-4 col-xs-4">
+                            <div>今日新增</div>
+                            <p class="p-chart-title"><h2>{{Data.childTodayMemberCount}}</h2> 人</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-body extra-pad">
+                    <h4 class="pros-title"> 推广数据</h4>
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-3">
+                            <div>文章总数</div>
+                            <p class="p-chart-title"><h2>{{Data.EnterpriseDetail.Total}}</h2> 篇</p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>文章点击</div>
+                            <p class="p-chart-title"><h2>{{Data.EnterpriseDetail.LookNum}}</h2> 次</p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>广告点击</div>
+                            <p class="p-chart-title"><h2>{{Data.EnterpriseDetail.ClickNum}}</h2> 次</p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>文章转发</div>
+                            <p class="p-chart-title"><h2>{{Data.EnterpriseDetail.TransNum}}</h2> 次</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row agencyinfo">
+        <div class=" col-md-12">
+            <div class="panel">
+                <div class="panel-body extra-pad">
+                    <h4 class="pros-title"> 帐号信息</h4>
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-3">
+                            <div>合作商类型</div>
+                            <p class="p-chart-title"><span class="text-muted">{{agencyMessage.Type}}</span></p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>地区</div>
+                            <p class="p-chart-title"><span>{{agencyMessage.City}}</span></p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>上级</div>
+                            <p class="p-chart-title"><span>{{agencyMessage.ParentAgencyName}}</span></p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>合作商手机号</div>
+                            <p class="p-chart-title"><span>{{agencyMessage.Mobile}}</span></p>
+                        </div>
+
+                        <div class="col-sm-3 col-xs-3">
+                            <div>充值折扣</div>
+                            <p class="p-chart-title"><span>{{agencyMessage.Sale}}</span></p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>状态</div>
+                            <p class="p-chart-title"><span>{{agencyMessage.State}}</span></p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>公司名称</div>
+                            <p class="p-chart-title"><span>{{agencyMessage.Company}}</span></p>
+                        </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <div>联系地址</div>
+                            <p class="p-chart-title"><span>{{agencyMessage.Address}}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
