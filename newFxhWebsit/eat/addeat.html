@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加餐饮信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+    <meta http-equiv="expires" content="0" />
+
+
+    <link href="../Content/css/style-responsive.css" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="../Content/css/adv.css" />
+    <link type="text/css" rel="stylesheet" href="../Content/css/date.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/css/bootstrap-reset.css" />
+
+    <link type="text/css" rel="stylesheet" href="../Content/css/bootstrap-fileupload.min.css" />
+    
+    <link type="text/css" rel="stylesheet" href="../Content/css/style.css" />
+
+    <script src="../Content/js/jquery-1.7.2.min.js"></script>
+    <script src="../Content/js/jquery-1.10.2.min.js"></script>
+    <script src="../Content/js/bootstrap.min.js"></script>
+    <script src="../Content/lib/_js/angularjs/angular.js"></script>
+    <script src="../Content/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+    <!-- 时间连选 -->
+    <script src="../Content/js/jquery.date_input.pack.js"></script>
+    <script src="../Content/css/kalendae.css"></script>
+    <script src="../Content/js/kalendae.standalone.js"></script>
+    <script src="../Content/js/admin/app-kalendae.js?v=20170105"></script>
+
+    <script src="../Content/js/commom.js"></script>
+    <script type="text/javascript" src="../Content/js/bootstrap-fileupload.min.js"></script>
+    </head>
+<body>
+    <div class="pgc-header">
+        <div class="pgc-headerwrap">
+            <div class="pgc-headerlogo">
+                <img src="../Content/images/login_logo.png" alt="Alternate Text" />
+            </div>
+            <div class="pgc-headerRight">
+               <ul class="notification-menu">
+                   <li>
+                    <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                        <i class="fa fa-envelope-o" style="font-size:24px;margin-top:0;"></i>
+                        <span class="badge">5</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <img src="../Content/images/img2.jpg" alt="" />
+                        admin
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                        <li><a href="#"><i class="fa fa-user"></i>杭州嗨趣网络科技有限公司</a></li>
+                        <li><a href="#"><i class="fa fa-sign-out"></i>退出</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            </div>
+        </div>
+        
+    </div>
+    <div class="pgc-center">
+
+        <div class="pgc-leftmenu">
+        
+        </div>
+        <div class="pgc-rightcount">
+            <div class="wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel  box-show">
+                            <header class="panel-heading">
+                                <div class="col-lg-10 slt">发布餐饮信息</div>
+                            </header>
+                            <div class="panel-body addinfo">
+                              <div class="col-lg-12">
+                                    <div class="alert alert-warning col-lg-12 "><i class="fa  fa-volume-down"></i>您今天还可免费发帖<strong>2</strong>条，本月还可免费发帖<strong>3</strong>条。<a href="" class="color_price">了解用户等级与发帖规则</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                   <form class="form-horizontal">
+                                       <h5 class="margin_b15">基本信息</h5>
+                                       <div class="form-group">
+                                            <label class="col-lg-2 col-sm-2 control-label">名称<span class="activeSlt">*</span></label>
+                                            <div class="col-lg-3">
+                                                <input type="text" placeholder="输入名称" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 col-sm-2 control-label">人均消费<span class="activeSlt">*</span></label>
+                                            <div class="col-lg-2"> 
+                                                 <div class="input-group ">
+                                                   <input type="text" class="form-control pull-left" placeholder="500">
+                                                    <span class="input-group-btn">
+                                                    <a class="btn btn-default nonecurpointer" type="button">元</a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 col-sm-2 control-label">营业时间<span class="activeSlt">*</span></label>
+                                            <div class="col-lg-2"> 
+                                                <input type="text" class="form_datetime form-control" readonly="readonly" name="reservation"  placeholder="选择激活日期" date-tool="" ng-model="ActiveDateRange">
+                                            </div>
+                                            <div class="col-lg-1  control-label" style="text-align:center;"> 
+                                               至
+                                            </div>
+                                            <div class="col-lg-2"> 
+                                                <input type="text" class="form_datetime form-control" readonly="readonly" name="reservation"  placeholder="选择激活日期" date-tool="" ng-model="ActiveDateRange">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 col-sm-2">描述<span class="activeSlt">*</span></label>
+                                            <div class="col-lg-3">
+                                                <input type="text" class="form-control" >
+                                            </div>
+                                          </div>
+                                          <div class="form-group">
+                                                <label class="col-lg-2 col-sm-2">房源图片<span class="activeSlt">*</span></label>
+                                                <div class="col-lg-3">
+                                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="">
+                                                </div>
+                                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                <div>
+                                                       <span class="btn btn-default btn-file  margin_r15">
+                                                       <span class="fileupload-new"><i class="fa fa-paper-clip"></i>选择图片</span>
+                                                       <span class="fileupload-exists"><i class="fa fa-undo"></i> 重新选择</span>
+                                                       <input type="file" class="default">
+                                                       </span>
+                                                    <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> 删除</a>
+                                                </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <h5 class="margin_b15">联系方式</h5>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 col-sm-2 control-label">联系地址<span class="activeSlt">*</span></label>
+                                            <div class="col-lg-3">
+                                                <input type="text" class="form-control" placeholder="请输入联系地址">
+                                            </div>
+                                        </div>
+                                         <div class="form-group">
+                                            <label class="col-lg-2 col-sm-2 control-label">联系人<span class="activeSlt">*</span></label>
+                                            <div class="col-lg-3">
+                                                <input type="text" class="form-control" placeholder="请输入联系人">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 col-sm-2 control-label">联系电话<span class="activeSlt">*</span></label>
+                                            <div class="col-lg-3">
+                                                <input type="text" class="form-control" placeholder="请输联系电话">
+                                            </div>
+                                        </div>
+                                         <h5 class="margin_b15">置顶推广</h5>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 col-sm-2 control-label">置顶时长</label>
+                                            <div class="col-lg-8">
+                                                <ul class="changeDate">
+                                                    <li class="active"><span >12小时</span></li>
+                                                    <li><span>1天</span></li>
+                                                    <li><span>3天</span></li>
+                                                    <li><span>7天</span></li>
+                                                    <li><span>15天</span></li>
+                                                    <li><span>30天</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 col-sm-2 control-label">系统推荐</label>
+                                            <div class="col-lg-8">
+                                                <ul class="changeDate">
+                                                    <li class="active"><span>自动续费</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 col-sm-2 control-label">价格</label>
+                                            <div class="col-lg-8">
+                                                <label class="control-label">
+                                                   <h3 class="color_price pull-left mar_r10">120 <i class="font-size13">元</i></h3>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-2 col-lg-10">
+                                                <button type="button" class="btn btn-danger">确认发布</button>
+                                                 <button type="button" class="btn btn-default">取消</button>
+                                            </div>
+                                        </div>
+                                   </form> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+
+
+</body>
+</html>
